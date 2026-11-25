@@ -696,7 +696,9 @@ function makeEnvironment(T,scene){
    #include <colorspace_fragment>
   }`
  }));
- sky.renderOrder=-200;sky.frustumCulled=false;scene.add(sky);
+ // Draw after opaque terrain so the depth test skips occluded sky pixels.
+ // Transparent snow and light effects still blend over the sky afterward.
+ sky.renderOrder=1000;sky.frustumCulled=false;scene.add(sky);
 
  const massifDefinitions=[
   {z:-106,depth:42,span:210,a:13.9,peak:31.5,freq:.035,offset:28.77, base:0x44444f,snow:0x84848e,tint:0x595563,fog:.48},
@@ -755,7 +757,7 @@ function makeEnvironment(T,scene){
   scene.add(m);buildLayers.push({mesh:m,phase:'mountain'});
  }
 
- // PBR snow: a relatively fine displacement mesh plus striated wind crust, microtexture and true shadow receiving.
+ // PBR snow: a fine displacement mesh with striated wind crust and microtexture.
  const snow=new T.PlaneGeometry(83,85,191,215);
  snow.rotateX(-PI/2);snow.translate(0,0,-21.8);
  const sp=snow.attributes.position;
@@ -828,7 +830,7 @@ function makeEnvironment(T,scene){
    gl_FragColor.rgb=mix(gl_FragColor.rgb,hazeRGB,lowVeil);
   `);
  };
- const snowMesh=new T.Mesh(snow,snowMat);snowMesh.name='Wind-sculpted crystal snow with actual shadows';snowMesh.receiveShadow=true;
+ const snowMesh=new T.Mesh(snow,snowMat);snowMesh.name='Wind-sculpted crystal snow';
  scene.add(snowMesh);buildLayers.push({mesh:snowMesh,phase:'ground',color:col(0xa9a6b5)});
 
  // Tree geometry batched, using a trunk and branching snow-capped whorls instead of billboards.
@@ -928,10 +930,6 @@ function makeEnvironment(T,scene){
  bake(foliage);bake(crust);bake(bark);
 
  const key=new T.DirectionalLight(keyColor,1.02);key.position.set(-9,9,-3.7);key.target.position.set(.2,0,0);
- key.castShadow=true;
- key.shadow.camera.left=-8;key.shadow.camera.right=8;key.shadow.camera.top=8;key.shadow.camera.bottom=-8;
- key.shadow.camera.near=.1;key.shadow.camera.far=29;
- key.shadow.mapSize.set(1024,1024);key.shadow.bias=-.00022;key.shadow.normalBias=.036;key.shadow.radius=3.6;
  scene.add(key,key.target);
  const hemi=new T.HemisphereLight(0xc5c3c8,0x6b696a,.47);scene.add(hemi);
  const fill=new T.DirectionalLight(0xd4d0d3,.26);fill.position.set(3.5,3,7);scene.add(fill);
@@ -1753,7 +1751,13 @@ function makePhotos(THREE,scene,{hasInitialPhotos=false}={}){
     const material=new THREE.MeshBasicMaterial({
       color:0xe5e5e5,map:tex,side:THREE.DoubleSide,toneMapped:false,blending:THREE.NormalBlending
     });
-    const item={title:m.title,caption:m.caption,url:src||art.toDataURL('image/jpeg',.89)};
+    const {title,caption}=m;
+    let previewUrl;
+    // Only the album needs a JPEG. The scene uses the full-resolution canvas directly.
+    const item=src?{title,caption,url:src}:{
+      title,caption,
+      get url(){return previewUrl??=art.toDataURL('image/jpeg',.89);}
+    };
     const face=new THREE.Mesh(surface,material);face.userData.photo=index;
     face.scale.set(width/max,height/max,1);
     g.add(face);
@@ -2032,7 +2036,7 @@ function makePhotos(THREE,scene,{hasInitialPhotos=false}={}){
       const bx=sine*radius,bz=cosine*radius;
       // Relinquish only the foreground offset if it would push the print outside
       // a safe frame. Mounts and the underlying orbit survive arbitrary camera use.
-      if(camera&&towardLens>.001){
+      if(k>0&&camera&&towardLens>.001){
         const fits=offset=>{
           projected.set(bx+offset*sine,ty,bz+offset*cosine).applyMatrix4(root.matrixWorld).project(camera);
           return Math.abs(projected.x)<(portrait?.74:.83)&&Math.abs(projected.y)<.82&&projected.z>-1&&projected.z<1;
@@ -3737,7 +3741,7 @@ function reflections(){
  const x=new T.DataTexture(bytes,w,h);x.mapping=T.EquirectangularReflectionMapping;x.colorSpace=T.SRGBColorSpace;x.needsUpdate=true;return x;
 }
 function launch(){
- const renderer=new T.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
+ const renderer=new T.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;
  const scene=new T.Scene(),camera=new T.PerspectiveCamera(40,1,.05,380);scene.add(camera);
  const pm=new T.PMREMGenerator(renderer),ref=reflections(),map=pm.fromEquirectangular(ref);scene.environment=map.texture;pm.dispose();ref.dispose();
  const pivot=new T.Group();pivot.name='Stationary tree assembly';scene.add(pivot);
@@ -3750,9 +3754,10 @@ function launch(){
  const interactiveSpin=touchScene||!s.reduced;
  const touchOrbitSeconds=s.reduced ? 8.8 : 7.4;
  const orbitAt=touchScene ? t=>mobileOrbitRhythm(t,touchOrbitSeconds) : orbitRhythm;
- const slowFrameLimit=touchScene ? .60 : .10;
- const slowFrameBudget=touchScene ? 18 : 45;
- const minimumDpr=touchScene ? Math.min(1,devicePixelRatio||1) : .85;
+ const slowFrameSeconds=.030;
+ const slowFrameBudget=touchScene ? 18 : 24;
+ const minimumDpr=touchScene ? Math.min(1,devicePixelRatio||1) : .75;
+ const canvasPixelBudget=touchScene ? 1_450_000 : 2_600_000;
  const bufferSizeLimit=renderer.capabilities?.maxTextureSize||Infinity;
  const act=makeBellAct(orbitAt),bell=makeBell(T,camera);
  wakeHUD();
@@ -3782,8 +3787,8 @@ function launch(){
  const canSwingMountedPhotos=()=>interactiveSpin&&s.phase==='tree'&&s.target<.5&&s.open<.002&&act.pulled<0;
  const zoomBy=factor=>{manualZoom=clamp(manualZoom*factor,1,1.75)};
  function targetDpr(){
-  const requested=reading()?Math.max(pixelRatio,Math.min(devicePixelRatio||1,portrait?1.7:2)):pixelRatio;
-  return Math.min(requested,bufferSizeLimit/Math.max(1,canvas.clientWidth,canvas.clientHeight));
+  const w=Math.max(1,canvas.clientWidth),h=Math.max(1,canvas.clientHeight);
+  return Math.min(pixelRatio,Math.sqrt(canvasPixelBudget/(w*h)),bufferSizeLimit/Math.max(w,h));
  }
  function resize(){
   const w=Math.max(1,canvas.clientWidth),h=Math.max(1,canvas.clientHeight);aspect=w/h;portrait=aspect<1;camera.aspect=aspect;
@@ -3870,8 +3875,15 @@ function launch(){
    if(spinAge>1.3&&Math.abs(spinVelocity)<.035)clearSpin();
 
   }
-  if(!paused&&elapsed>.029&&elapsed<slowFrameLimit)slow++;else slow=Math.max(0,slow-1);
-  if(slow>slowFrameBudget&&pixelRatio>minimumDpr+.02&&!reading()){pixelRatio=Math.max(minimumDpr,pixelRatio*.89);slow=0;}
+  const liveRatio=targetDpr();
+  if(!paused&&elapsed>slowFrameSeconds)slow+=Math.min(8,elapsed/slowFrameSeconds);
+  else slow=Math.max(0,slow-2);
+  if(slow>=slowFrameBudget){
+   // Count very slow frames too, and lower the current buffer rather than
+   // stepping through ratios that the pixel budget already caps.
+   if(liveRatio>minimumDpr+.02)pixelRatio=Math.max(minimumDpr,liveRatio*(elapsed>.10 ? .77 : .88));
+   slow=0;
+  }
   // A drawing buffer resize clears WebGL. Allocate only in the same RAF as draw.
   if(resizePending||lastDpr!==targetDpr())resize();
   rig(dt);
@@ -3883,7 +3895,7 @@ function launch(){
     bellTap.style.top=(((1-bellScreen.y)*50).toFixed(2))+'%';}
   }
   const t=s.reduced?0:age;
-  env.update(t,s.world);world.update(t,s.world,pixelRatio*canvas.clientHeight/720);
+  env.update(t,s.world);world.update(t,s.world,lastDpr*canvas.clientHeight/720);
   const orbitalScale=act.orbitalScale(),turnRate=act.yawSpeed();
   const rhythm=orbitAt(act.orbitalTime);
   const orbitTurn=animatedOrbit&&s.phase==='tree'&&s.open>0?rhythm.turn:undefined;
@@ -4034,7 +4046,7 @@ function launch(){
    if(e.key==='+'||e.key==='='||e.key==='-'){e.preventDefault();zoomBy(e.key==='-'?1/1.12:1.12);}
   }
  });
- document.addEventListener('visibilitychange',()=>{last=0});
+ document.addEventListener('visibilitychange',()=>{last=0;slow=0;});
  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();audio.dispose();$('#sound-toggle').hidden=true;failure('WebGL context lost')});
  personal.bridge={photos:x=>photos.replace(x),letter:x=>seq.setLetter?.(x),preview:reset};
  if(personal.photos?.length)personal.bridge.photos(personal.photos);
@@ -4058,7 +4070,10 @@ function launch(){
  requestAnimationFrame(frame);
 }
 showEnvelope();
-try{launch()}catch(e){failure(e)}
+// Paint the envelope before constructing the scenery and compiling shaders.
+requestAnimationFrame(()=>setTimeout(()=>{
+ try{launch()}catch(e){failure(e)}
+},0));
 
 return {};
 })();
