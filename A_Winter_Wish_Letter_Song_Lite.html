@@ -35,7 +35,13 @@ main.failed #scene{visibility:hidden}
 dialog{width:min(520px,90vw);margin:auto;max-height:87dvh}dialog::backdrop{background:#e9dfc45c;backdrop-filter:blur(8px)}
 #book{background:#f3eddfef;padding:16px 24px 12px}#book::backdrop{background:#1d29366f}
 .book-top,.book-bottom{display:flex;align-items:center;justify-content:space-between}.book-top span{font-size:10px;letter-spacing:.28em}.book-top button{font-size:24px}.book-bottom button{font-size:24px}.book-bottom button:hover,.book-top button:hover{color:#876742}
-figure{margin:4px 0 0}figure img{display:block;width:100%;height:min(52vh,430px);object-fit:contain;background:#eae2d4}figcaption{display:flex;gap:9px;align-items:baseline;justify-content:space-between;padding:4px 0 0}figcaption h2{font-size:15px;font-weight:400}figcaption small{white-space:nowrap;color:#776a59;letter-spacing:.15em}
+#book figure{margin:4px 0 0}
+#book figure img{display:block;width:100%;height:auto;max-height:min(54dvh,480px);object-fit:contain;background:#eae2d4}
+#book button{-webkit-tap-highlight-color:transparent}
+#book figcaption{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 12px;align-items:baseline;padding:12px 0 0}
+#caption{font-size:16px;font-weight:500;margin:0;overflow-wrap:anywhere}
+#index{white-space:nowrap;color:#776a59;letter-spacing:.15em}
+#photo-blessing{grid-column:1/-1;margin:0;color:#714d3c;font-size:15px;line-height:1.55;overflow-wrap:anywhere}
 #accessible-letter{overflow:hidden;width:min(570px,92vw);padding:clamp(18px,4vw,38px);font-size:17px;line-height:1.68;overflow-wrap:anywhere}#letter-body{white-space:pre-wrap}#letter-signature{text-align:right;font-style:italic}#letter-title{font-weight:500}
 #scene[data-phase="tree"]{cursor:grab}#scene[data-phase="tree"]:active{cursor:grabbing}
 @media(max-width:610px){#mast{gap:7px;padding: max(9px,env(safe-area-inset-top)) 15px 12px}#mast-nav{gap:11px}#wordmark{letter-spacing:.19em;font-size:9px;gap:6px}#wordmark span{width:13px}#mast-nav button,#mast-nav #wish-open{font-size:8px;letter-spacing:.08em}#time-control summary{min-width:21px}#time-control summary svg{width:15px;height:15px}#controls .primary{min-width:131px;padding:0 18px;gap:16px}#controls:has(#flight-direct:not([hidden])) #mode{right:calc(100% + 12px);font-size:10px}}
@@ -138,7 +144,7 @@ body:has(#welcome[open]:not([data-opening])) :is(#mast,#controls,#bell-pull,#orb
 <nav id="letter-actions" class="scene-actions" hidden aria-label="来信操作"><button id="skip-wipe" type="button">直接读信</button><button id="return-tree" type="button">返回圣诞树</button></nav>
 <dialog id="accessible-letter" aria-label="完整来信"><div class="book-top"><span>A WINTER WISH</span><button id="close-letter" aria-label="关闭来信">×</button></div><article id="letter-copy" tabindex="0" aria-label="来信正文"><h1 id="letter-title"></h1><p id="letter-recipient"></p><p id="letter-body"></p><p id="letter-signature"></p></article><div class="letter-footer"><button id="letter-return-tree" type="button">返回圣诞树</button></div></dialog>
 <dialog id="audio-credits" aria-labelledby="audio-credits-title"><div class="book-top"><h2 id="audio-credits-title">声音来源与许可</h2><button id="close-audio-credits" aria-label="关闭声音来源与许可">×</button></div><ul id="audio-credit-list"></ul></dialog>
-<dialog id="book" aria-label="冬日相册"><div class="book-top"><span>THE WINTER GALLERY</span><button id="close" aria-label="关闭相册">×</button></div><figure><img id="print" alt=""><figcaption><small id="index"></small><h2 id="caption"></h2></figcaption></figure><div class="book-bottom"><button id="prev" aria-label="上一张">‹</button><button id="next" aria-label="下一张">›</button></div></dialog>
+<dialog id="book" aria-label="冬日相册"><div class="book-top"><span>THE WINTER GALLERY</span><button id="close" aria-label="关闭相册">×</button></div><figure><img id="print" alt=""><figcaption><h2 id="caption"></h2><small id="index"></small><p id="photo-blessing" hidden></p></figcaption></figure><div class="book-bottom"><button id="prev" aria-label="上一张">‹</button><button id="next" aria-label="下一张">›</button></div></dialog>
 </main>
 <dialog id="welcome" aria-label="雪夜来信">
 <button id="open-envelope" type="button" aria-label="拆信 · 开启音乐">
@@ -147,7 +153,7 @@ body:has(#welcome[open]:not([data-opening])) :is(#mast,#controls,#bell-pull,#orb
 <span class="envelope-flakes" aria-hidden="true"></span>
 </dialog>
 <!-- WISH_PAYLOAD --><script type="application/json" id="wish-data">{"mode":"creator","photos":[]}</script>
-<script id="wish-shell" type="application/json">"\u003c!doctype html\u003e\u003chtml lang=\"zh-CN\"\u003e\u003chead\u003e\u003cmeta charset=\"utf-8\"\u003e\u003cmeta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover\"\u003e\u003cmeta name=\"theme-color\" content=\"#899298\"\u003e\u003ctitle\u003eA Winter Wish · 雪夜来信\u003c/title\u003e\u003clink rel=\"icon\" href=\"data:,\"\u003e\u003cstyle\u003e:root{font-family:Georgia,\"Noto Serif SC\",Songti,serif;color:#f9f2e4;background:#20242b;color-scheme:light;--ivory:#f9f2e4;--line:#fff1db58;--inset:clamp(14px,3.45vw,62px)}\n*{box-sizing:border-box}[hidden]{display:none!important}html,body,#world{margin:0;width:100%;height:100%;height:100dvh;overflow:hidden}#world{position:relative}#scene{display:block;background:#20242b;width:100%;height:100%;touch-action:none;outline-offset:-4px}\nbutton,summary{border:0;background:none;color:inherit;font:inherit;cursor:pointer;min-height:34px}button:hover,summary:hover{color:#fffaf1}button:focus-visible,summary:focus-visible,#scene:focus-visible,#daylight:focus-visible{outline:1px solid #f4d9aa;outline-offset:4px}\n#mast{position:absolute;z-index:3;inset:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:max(13px,env(safe-area-inset-top)) var(--inset) 18px;pointer-events:none;color:var(--ivory);text-shadow:0 1px 4px #151820,0 0 13px #161a22;background:linear-gradient(180deg,#14182255,transparent)}\n#wordmark{white-space:nowrap;font-size:clamp(9px,1vw,12px);font-weight:400;letter-spacing:.36em;display:flex;align-items:center;gap:clamp(7px,1.5vw,23px)}\n#wordmark span{display:block;width:clamp(12px,3.5vw,58px);height:1px;background:#fbefd169}\n#mast-nav{display:flex;align-items:center;gap:clamp(12px,2.5vw,40px);pointer-events:auto;white-space:nowrap}\n#mast-nav button,#mast-nav summary{position:relative;inset:auto;min-width:0;border:0;padding:0;box-shadow:none;text-shadow:inherit;background:none;letter-spacing:.18em;font:inherit;font-size:10px;font-family:Georgia,\"Noto Serif SC\",serif}\n#mast-nav [aria-current=\"page\"]::after,#mast-nav button:hover::after{content:\"\";position:absolute;bottom:5px;left:0;right:.17em;height:1px;background:#fae9cf9c}\n#mast-nav #wish-open{position:relative;right:auto;top:auto;padding:0;z-index:auto;border:none;background:none;color:inherit;text-shadow:inherit;font:inherit;font-size:10px;letter-spacing:.18em}\n#time-control{position:relative;display:block;margin-left:-3px}#time-control summary{display:grid;place-items:center;min-width:30px}#time-control summary::-webkit-details-marker{display:none}\n#time-control summary svg{display:block}#time-control[open] summary{color:#ffe5b7}\n.light-pop{position:absolute;right:-1px;top:calc(100% + 7px);width:167px;background:#30323cdf;border:1px solid #f2e7d56e;box-shadow:0 9px 28px #171b2944;color:#fff4de;padding:10px 12px;letter-spacing:.13em}\n.light-pop label{font-size:11px;display:block;margin-bottom:4px}.light-pop\u003ediv{display:flex;align-items:center;justify-content:space-between;gap:7px;font-size:10px}\n#daylight{width:104px;margin:0;accent-color:#dcb887;height:20px;cursor:pointer}\n#loading{position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);color:#fff6e3;letter-spacing:.10em;text-shadow:0 1px 5px #171b26;font-size:12px}\n#controls{position:absolute;z-index:2;inset:auto 0 0;display:grid;justify-items:center;gap:7px;padding:16px 12px max(28px,env(safe-area-inset-bottom));pointer-events:none;background:linear-gradient(0deg,#171b2864,transparent)}\n#controls .actions{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px clamp(10px,2.65vw,35px);position:relative}\n#controls button{pointer-events:auto;color:var(--ivory);letter-spacing:.12em;min-height:44px;text-shadow:0 1px 4px #181920;font-size:12px;touch-action:manipulation}\n#controls .primary{display:inline-flex;align-items:center;justify-content:center;gap:28px;padding:0 27px;border:1px solid #f4e4c683;border-radius:999px;background:#2b2f3b54;box-shadow:inset 0 0 12px #f8e9c516;min-width:168px}\n#controls .primary:hover{background:#57533e6b;border-color:#fff3db}\n#controls .secondary{border:0;background:none;padding:0;opacity:.84}#controls .secondary:hover{text-decoration:underline;text-underline-offset:7px;opacity:1}\n#controls:has(#flight-direct:not([hidden])) #mode{position:absolute;right:calc(100% + 23px);white-space:nowrap}\n#hint{min-height:17px;margin:0;font-size:12px;text-align:center;color:#f8eed9d9;text-shadow:0 1px 6px #161921;letter-spacing:.09em}\n#failure,dialog{background:#f4ebd9;color:#483d34;padding:25px;border:1px solid #e9d9c0;box-shadow:0 18px 68px #23233345}\n#failure{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:min(92vw,570px);max-height:min(83dvh,calc(100% - 95px));display:flex;flex-direction:column;gap:12px;padding:clamp(18px,4vw,38px);font-family:\"Noto Sans SC\",\"PingFang SC\",\"Microsoft YaHei\",system-ui,sans-serif}\n.fallback-heading span{font:12px Georgia,serif;letter-spacing:.25em}\n.fallback-heading p{margin:6px 0 0;font-size:13px;color:#67594d}\n#fallback-letter{overflow:auto;overscroll-behavior:contain;min-height:0;line-height:1.7}\n.fallback-actions,.letter-footer{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}\n.fallback-actions button,.letter-footer button{min-height:44px;padding:0 13px;border:1px solid #9e886e;border-radius:999px;color:#483d34;touch-action:manipulation}\n.fallback-actions button:hover,.letter-footer button:hover{color:#483d34;background:#e9dcc6}\nmain.failed :is(#controls,#orbit-actions,#letter-actions,#bell-pull,#experience,#album,#time-control){display:none}\nmain.failed #scene{visibility:hidden}\ndialog{width:min(520px,90vw);margin:auto;max-height:87dvh}dialog::backdrop{background:#e9dfc45c;backdrop-filter:blur(8px)}\n#book{background:#f3eddfef;padding:16px 24px 12px}#book::backdrop{background:#1d29366f}\n.book-top,.book-bottom{display:flex;align-items:center;justify-content:space-between}.book-top span{font-size:10px;letter-spacing:.28em}.book-top button{font-size:24px}.book-bottom button{font-size:24px}.book-bottom button:hover,.book-top button:hover{color:#876742}\nfigure{margin:4px 0 0}figure img{display:block;width:100%;height:min(52vh,430px);object-fit:contain;background:#eae2d4}figcaption{display:flex;gap:9px;align-items:baseline;justify-content:space-between;padding:4px 0 0}figcaption h2{font-size:15px;font-weight:400}figcaption small{white-space:nowrap;color:#776a59;letter-spacing:.15em}\n#accessible-letter{overflow:hidden;width:min(570px,92vw);padding:clamp(18px,4vw,38px);font-size:17px;line-height:1.68;overflow-wrap:anywhere}#letter-body{white-space:pre-wrap}#letter-signature{text-align:right;font-style:italic}#letter-title{font-weight:500}\n#scene[data-phase=\"tree\"]{cursor:grab}#scene[data-phase=\"tree\"]:active{cursor:grabbing}\n@media(max-width:610px){#mast{gap:7px;padding: max(9px,env(safe-area-inset-top)) 15px 12px}#mast-nav{gap:11px}#wordmark{letter-spacing:.19em;font-size:9px;gap:6px}#wordmark span{width:13px}#mast-nav button,#mast-nav #wish-open{font-size:8px;letter-spacing:.08em}#time-control summary{min-width:21px}#time-control summary svg{width:15px;height:15px}#controls .primary{min-width:131px;padding:0 18px;gap:16px}#controls:has(#flight-direct:not([hidden])) #mode{right:calc(100% + 12px);font-size:10px}}\n@media(max-width:350px){#wordmark span{display:none}#mast{padding-inline:12px}#mast-nav{gap:8px}}\n:is(#mast,#controls,.scene-actions){transition:opacity .52s ease}\n@media (hover:hover) and (pointer:fine){\n #world:not(.failed)[data-hud=\"off\"]:not(:has(:is(#mast,#controls,.scene-actions) :focus-visible,#time-control[open])) :is(#mast,#controls,.scene-actions){opacity:0}\n #world:not(.failed)[data-hud=\"off\"]:not(:has(:is(#mast,#controls,.scene-actions) :focus-visible,#time-control[open])) :is(#mast-nav,#controls button,.scene-actions button){pointer-events:none}\n}\n#scene:not([data-ready]) ~ #controls,#scene[data-phase=\"flight\"] ~ #controls{visibility:hidden}\n@media(prefers-reduced-motion:reduce){:is(#mast,#controls,.scene-actions){transition:none}}\n#bell-pull{position:absolute;z-index:4;left:86%;top:34%;width:clamp(44px,8.5vmin,82px);height:clamp(44px,8vmin,74px);transform:translate(-50%,-50%);padding:0;border:0;border-radius:48%;background:transparent;box-shadow:none;touch-action:manipulation}\n#bell-pull:focus-visible{outline:1px dashed #ffe4a3;outline-offset:4px}\n\n#accessible-letter{font-family:\"Noto Sans CJK SC\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"WenQuanYi Micro Hei\", system-ui, sans-serif;font-weight:400}\n\n/* Letter actions are not part of the proximity-controlled scene rails. */\n.scene-actions{position:absolute;z-index:3;inset:auto max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));display:flex;justify-content:center;align-items:center;gap:8px;pointer-events:none}\n.scene-actions button{min-height:44px;padding:0 14px;border:1px solid #e2d5b5a0;border-radius:999px;touch-action:manipulation;pointer-events:auto;font-size:12px;background:#252934ed;color:#fff5e1}\n.scene-actions button:hover{background:#393c47}\n#orbit-actions{justify-content:flex-end;bottom:max(20px,env(safe-area-inset-bottom))}\n@media(max-width:380px){#orbit-actions{bottom:max(92px,calc(env(safe-area-inset-bottom) + 64px))}}\n#skip-wipe{background:#3d392f;border-color:#f1ddab}\n#skip-wipe:hover{background:#535044}\n#scene[data-phase=\"snow\"] ~ #controls{padding-bottom:calc(max(12px,env(safe-area-inset-bottom)) + 47px)}\n#scene[data-phase=\"snow\"] ~ #controls .actions{display:none}\n#scene[data-phase=\"snow\"] ~ #controls #hint{background:#252934ed;color:#fff5e1;padding:6px 10px;border-radius:6px;text-shadow:none}\n#scene[data-phase=\"letter\"] ~ #controls .primary{background:#252934ed}\n#accessible-letter[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:8px;width:min(570px,calc(100vw - 32px))}\n#letter-copy{overflow:auto;overflow-wrap:anywhere;overscroll-behavior:contain}\n#letter-copy:focus-visible{outline:1px solid #876742;outline-offset:-1px}\n\n#mast-nav #sound-toggle{font-family:serif;font-size:17px;min-width:26px;line-height:1}\n#mast-nav #sound-toggle[aria-pressed=\"false\"]{opacity:.58;text-decoration:line-through}\n\n#audio-credits{padding:14px 22px;background:#f3eddf;color:#393026}\n#audio-credits h2{font-size:16px}\n#audio-credit-list{padding-left:18px;font:14px/1.45 system-ui,sans-serif}\n#audio-credit-list li{margin-bottom:10px}\n#audio-credit-list small{display:block}\n#audio-credit-list a{color:#69421f;margin-right:12px}\n#mast-nav #audio-info{font-size:12px;min-width:20px;margin-left:-7px}\n\n#welcome{width:min(76vw,390px,110dvh);max-height:none;padding:0;overflow:visible;border:0;box-shadow:none;background:none;color:#fff4dd}\n#welcome::backdrop{background:radial-gradient(ellipse at 50% 42%,#3438463b 0%,#151a23ba 72%,#10151dd9 100%);backdrop-filter:blur(4px)}\nbody:has(#welcome[open]:not([data-opening])) :is(#mast,#controls,#bell-pull,#orbit-actions,#letter-actions,#loading,#failure){visibility:hidden}\n#open-envelope{position:relative;display:block;width:100%;padding:0;touch-action:manipulation}\n.envelope-paper{position:relative;isolation:isolate;display:block;width:100%;aspect-ratio:1.62;border-radius:3px;background:\n repeating-linear-gradient(118deg,#fff0 0 3px,#75533109 4px,#fff0 5px),\n linear-gradient(154deg,#f8eacc,#d9bc93);box-shadow:0 25px 72px #0e1118bf,0 2px 8px #17141b88;transition:transform .24s ease}\n.envelope-paper::before,.envelope-paper::after,.envelope-flap{position:absolute;inset:0;content:\"\"}\n.envelope-paper::before{background:linear-gradient(118deg,#edd8b8,#e1c39a);clip-path:polygon(0 1%,52% 60%,100% 3%,100% 100%,0 100%)}\n.envelope-paper::after{background:linear-gradient(8deg,#e8cdab,#fbedd0);clip-path:polygon(0 100%,50% 47%,100% 100%);border-radius:0 0 3px 3px}\n.envelope-flap{z-index:1;filter:drop-shadow(0 2px 2px #82623d5c)}\n.envelope-flap::before{content:\"\";position:absolute;inset:0;background:linear-gradient(173deg,#fbebcd,#e7cba3);clip-path:polygon(0 0,100% 0,55% 55%,50% 58%,45% 55%);border-radius:3px}\n.envelope-seal{position:absolute;z-index:2;left:50%;top:55%;width:clamp(41px,12vw,63px);aspect-ratio:1;display:grid;place-items:center;transform:translate(-50%,-50%) rotate(-10deg);border-radius:46% 56% 43% 54% / 49% 45% 56% 51%;background:\n radial-gradient(ellipse at 27% 16%,#d079636b 0%,#d0796300 44%),\n radial-gradient(ellipse at 62% 65%,#8e3b3d 0%,#7f3034 52%,#54242f 95%);box-shadow:1px 5px 8px #69403882,inset -2px -3px 4px #4f1b25d2,inset 2px 1px 3px #d7766290}\n.envelope-seal::before{content:\"\";position:absolute;inset:16% 15% 15% 16%;border-radius:52% 46% 49% 45%;border:2px solid #69252d80;box-shadow:0 1px 1px #db887367,inset 0 1px 2px #52202891}\n.envelope-seal::after{content:\"♪\";position:relative;color:#e3ad85;font:bold clamp(21px,7vw,33px)/1 Georgia,serif;text-shadow:0 1px #411f28,0 -1px #f0bc9238;transform:translateY(-.035em)}\n#open-envelope:hover .envelope-paper{transform:translateY(-4px)}\n#open-envelope:focus-visible{outline:none}\n#open-envelope:focus-visible .envelope-paper{box-shadow:0 25px 72px #0e1118bf,0 0 20px #ffe1a647}\n.envelope-flakes{position:absolute;inset:0;pointer-events:none}\n.envelope-flakes i{position:absolute;left:var(--left);top:var(--top);width:var(--size);aspect-ratio:1;border-radius:50%;background:#ffefd2;opacity:0}\n#welcome[data-opening]::backdrop{animation:winter-backdrop-away .76s ease forwards}\n#welcome[data-opening] #open-envelope{animation:winter-envelope-away .76s ease-in forwards;pointer-events:none}\n#welcome[data-opening] .envelope-flakes i{animation:winter-envelope-flake .76s ease-out forwards;animation-delay:var(--delay)}\n@keyframes winter-backdrop-away{to{opacity:0}}\n@keyframes winter-envelope-away{25%{opacity:.88;transform:scale(1.02)}to{opacity:0;transform:translateY(-13px) scale(1.075);filter:blur(10px)}}\n@keyframes winter-envelope-flake{0%{opacity:0}20%{opacity:.88}to{opacity:0;transform:translate(var(--x),var(--y)) scale(.35)}}\n@media(prefers-reduced-motion:reduce){\n .envelope-paper{transition:none}\n #open-envelope:hover .envelope-paper{transform:none}\n #welcome[data-opening]::backdrop,#welcome[data-opening] #open-envelope,#welcome[data-opening] .envelope-flakes i{animation:none}\n}\n\n\u003c/style\u003e\u003c/head\u003e\n\u003cbody\u003e\u003cmain id=\"world\" data-hud=\"off\"\u003e\u003ccanvas id=\"scene\" tabindex=\"0\" aria-label=\"互动雪景。拖动或按左右方向键旋转，双指、滚轮或加减键缩放，按空格展开或收拢圣诞树\"\u003e\u003c/canvas\u003e\n\u003cheader id=\"mast\"\u003e\n\u003cdiv id=\"wordmark\"\u003eA WINTER WISH\u003cspan aria-hidden=\"true\"\u003e\u003c/span\u003e\u003c/div\u003e\n\u003cnav id=\"mast-nav\" aria-label=\"雪夜来信\"\u003e\n\u003cbutton id=\"experience\" type=\"button\" aria-current=\"page\" hidden\u003eEXPERIENCE\u003c/button\u003e\n\u003cbutton id=\"album\" type=\"button\" title=\"相册\" hidden\u003eGALLERY\u003c/button\u003e\n\u003cbutton id=\"wish-open\" type=\"button\" title=\"定制信件 / 上传照片\" aria-label=\"定制信件 / 上传照片\" hidden\u003eATELIER\u003c/button\u003e\n\u003cdetails id=\"time-control\" hidden\u003e\n\u003csummary title=\"时间光线\" aria-label=\"时间光线\"\u003e\u003csvg viewBox=\"0 0 22 22\" width=\"17\" height=\"17\" aria-hidden=\"true\"\u003e\u003cpath d=\"M17.4 13.5A7 7 0 0 1 8.5 4.6 7.1 7.1 0 1 0 17.4 13.5Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.1\"/\u003e\u003cpath d=\"M15.5 4v5m-2.5-2.5h5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\".8\"/\u003e\u003c/svg\u003e\u003c/summary\u003e\n\u003cdiv class=\"light-pop\"\u003e\u003clabel for=\"daylight\"\u003e时间 · \u003coutput id=\"daylight-label\" for=\"daylight\"\u003e夜晚\u003c/output\u003e\u003c/label\u003e\u003cdiv\u003e\u003cspan aria-hidden=\"true\"\u003e昼\u003c/span\u003e\u003cinput id=\"daylight\" type=\"range\" min=\"0\" max=\"100\" step=\"1\" value=\"100\" aria-valuetext=\"夜晚\"\u003e\u003cspan aria-hidden=\"true\"\u003e夜\u003c/span\u003e\u003c/div\u003e\u003c/div\u003e\n\u003c/details\u003e\u003cbutton id=\"sound-toggle\" type=\"button\" aria-label=\"声音\" aria-pressed=\"false\" title=\"开启声音\" hidden\u003e♪\u003c/button\u003e\u003cbutton id=\"audio-info\" type=\"button\" title=\"声音来源与许可\" aria-label=\"声音来源与许可\" hidden\u003eⓘ\u003c/button\u003e\u003c/nav\u003e\n\u003c/header\u003e\n\u003cdiv id=\"loading\" role=\"status\"\u003e雪正慢慢落下…\u003c/div\u003e\n\u003csection id=\"failure\" hidden aria-label=\"雪夜来信 · 阅读版\"\u003e\n\u003cdiv class=\"fallback-heading\"\u003e\u003cspan\u003eA WINTER WISH\u003c/span\u003e\u003cp role=\"status\"\u003e当前浏览器无法显示 3D 雪景，可以在这里读信。\u003c/p\u003e\u003c/div\u003e\n\u003cdiv id=\"fallback-letter\"\u003e\u003c/div\u003e\n\u003cdiv class=\"fallback-actions\"\u003e\u003cbutton id=\"fallback-gallery\" type=\"button\" hidden\u003e查看随信照片\u003c/button\u003e\u003cbutton id=\"retry\" type=\"button\"\u003e重试雪景\u003c/button\u003e\u003c/div\u003e\n\u003c/section\u003e\n\u003cbutton id=\"bell-pull\" type=\"button\" hidden aria-label=\"点击右上方木牌，打开雪橇来信\"\u003e\u003c/button\u003e\n\u003cfooter id=\"controls\"\u003e\u003cp id=\"hint\" aria-live=\"polite\"\u003e\u003c/p\u003e\u003cdiv class=\"actions\"\u003e\u003cbutton id=\"mode\" class=\"secondary\" type=\"button\"\u003e进入雪夜\u003c/button\u003e\u003cbutton id=\"flight-direct\" class=\"primary\" type=\"button\" hidden disabled\u003e\u003cspan\u003e雪橇来信\u003c/span\u003e\u003cspan aria-hidden=\"true\"\u003e→\u003c/span\u003e\u003c/button\u003e\u003cbutton id=\"read\" class=\"primary\" type=\"button\" hidden\u003e读完整来信\u003c/button\u003e\u003cbutton id=\"canvas-letter-exit\" class=\"secondary\" type=\"button\" hidden\u003e返回圣诞树\u003c/button\u003e\u003cbutton id=\"replay\" class=\"secondary\" type=\"button\" hidden\u003e再看一遍\u003c/button\u003e\u003c/div\u003e\u003c/footer\u003e\n\u003cnav id=\"orbit-actions\" class=\"scene-actions\" hidden aria-label=\"照片操作\"\u003e\u003cbutton id=\"random-photo\" type=\"button\" hidden\u003e随机抓一张\u003c/button\u003e\u003c/nav\u003e\n\u003cnav id=\"letter-actions\" class=\"scene-actions\" hidden aria-label=\"来信操作\"\u003e\u003cbutton id=\"skip-wipe\" type=\"button\"\u003e直接读信\u003c/button\u003e\u003cbutton id=\"return-tree\" type=\"button\"\u003e返回圣诞树\u003c/button\u003e\u003c/nav\u003e\n\u003cdialog id=\"accessible-letter\" aria-label=\"完整来信\"\u003e\u003cdiv class=\"book-top\"\u003e\u003cspan\u003eA WINTER WISH\u003c/span\u003e\u003cbutton id=\"close-letter\" aria-label=\"关闭来信\"\u003e×\u003c/button\u003e\u003c/div\u003e\u003carticle id=\"letter-copy\" tabindex=\"0\" aria-label=\"来信正文\"\u003e\u003ch1 id=\"letter-title\"\u003e\u003c/h1\u003e\u003cp id=\"letter-recipient\"\u003e\u003c/p\u003e\u003cp id=\"letter-body\"\u003e\u003c/p\u003e\u003cp id=\"letter-signature\"\u003e\u003c/p\u003e\u003c/article\u003e\u003cdiv class=\"letter-footer\"\u003e\u003cbutton id=\"letter-return-tree\" type=\"button\"\u003e返回圣诞树\u003c/button\u003e\u003c/div\u003e\u003c/dialog\u003e\n\u003cdialog id=\"audio-credits\" aria-labelledby=\"audio-credits-title\"\u003e\u003cdiv class=\"book-top\"\u003e\u003ch2 id=\"audio-credits-title\"\u003e声音来源与许可\u003c/h2\u003e\u003cbutton id=\"close-audio-credits\" aria-label=\"关闭声音来源与许可\"\u003e×\u003c/button\u003e\u003c/div\u003e\u003cul id=\"audio-credit-list\"\u003e\u003c/ul\u003e\u003c/dialog\u003e\n\u003cdialog id=\"book\" aria-label=\"冬日相册\"\u003e\u003cdiv class=\"book-top\"\u003e\u003cspan\u003eTHE WINTER GALLERY\u003c/span\u003e\u003cbutton id=\"close\" aria-label=\"关闭相册\"\u003e×\u003c/button\u003e\u003c/div\u003e\u003cfigure\u003e\u003cimg id=\"print\" alt=\"\"\u003e\u003cfigcaption\u003e\u003csmall id=\"index\"\u003e\u003c/small\u003e\u003ch2 id=\"caption\"\u003e\u003c/h2\u003e\u003c/figcaption\u003e\u003c/figure\u003e\u003cdiv class=\"book-bottom\"\u003e\u003cbutton id=\"prev\" aria-label=\"上一张\"\u003e‹\u003c/button\u003e\u003cbutton id=\"next\" aria-label=\"下一张\"\u003e›\u003c/button\u003e\u003c/div\u003e\u003c/dialog\u003e\n\u003c/main\u003e\n\u003cdialog id=\"welcome\" aria-label=\"雪夜来信\"\u003e\n\u003cbutton id=\"open-envelope\" type=\"button\" aria-label=\"拆信 · 开启音乐\"\u003e\n\u003cspan class=\"envelope-paper\" aria-hidden=\"true\"\u003e\u003cspan class=\"envelope-flap\"\u003e\u003c/span\u003e\u003cspan class=\"envelope-seal\"\u003e\u003c/span\u003e\u003c/span\u003e\n\u003c/button\u003e\n\u003cspan class=\"envelope-flakes\" aria-hidden=\"true\"\u003e\u003c/span\u003e\n\u003c/dialog\u003e\n\u003c!-- WISH_PAYLOAD --\u003e\u003cscript type=\"application/json\" id=\"wish-data\"\u003e@@WISH_DATA_08@@\u003c/script\u003e\n\u003cscript id=\"wish-shell\" type=\"application/json\"\u003e@@WISH_SHELL_08@@\u003c/script\u003e@@WISH_RUNTIME_08@@\n\u003c/body\u003e\u003c/html\u003e\n"</script><script id="wish-runtime">
+<script id="wish-shell" type="application/json">"\u003c!doctype html\u003e\u003chtml lang=\"zh-CN\"\u003e\u003chead\u003e\u003cmeta charset=\"utf-8\"\u003e\u003cmeta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover\"\u003e\u003cmeta name=\"theme-color\" content=\"#899298\"\u003e\u003ctitle\u003eA Winter Wish · 雪夜来信\u003c/title\u003e\u003clink rel=\"icon\" href=\"data:,\"\u003e\u003cstyle\u003e:root{font-family:Georgia,\"Noto Serif SC\",Songti,serif;color:#f9f2e4;background:#20242b;color-scheme:light;--ivory:#f9f2e4;--line:#fff1db58;--inset:clamp(14px,3.45vw,62px)}\n*{box-sizing:border-box}[hidden]{display:none!important}html,body,#world{margin:0;width:100%;height:100%;height:100dvh;overflow:hidden}#world{position:relative}#scene{display:block;background:#20242b;width:100%;height:100%;touch-action:none;outline-offset:-4px}\nbutton,summary{border:0;background:none;color:inherit;font:inherit;cursor:pointer;min-height:34px}button:hover,summary:hover{color:#fffaf1}button:focus-visible,summary:focus-visible,#scene:focus-visible,#daylight:focus-visible{outline:1px solid #f4d9aa;outline-offset:4px}\n#mast{position:absolute;z-index:3;inset:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:max(13px,env(safe-area-inset-top)) var(--inset) 18px;pointer-events:none;color:var(--ivory);text-shadow:0 1px 4px #151820,0 0 13px #161a22;background:linear-gradient(180deg,#14182255,transparent)}\n#wordmark{white-space:nowrap;font-size:clamp(9px,1vw,12px);font-weight:400;letter-spacing:.36em;display:flex;align-items:center;gap:clamp(7px,1.5vw,23px)}\n#wordmark span{display:block;width:clamp(12px,3.5vw,58px);height:1px;background:#fbefd169}\n#mast-nav{display:flex;align-items:center;gap:clamp(12px,2.5vw,40px);pointer-events:auto;white-space:nowrap}\n#mast-nav button,#mast-nav summary{position:relative;inset:auto;min-width:0;border:0;padding:0;box-shadow:none;text-shadow:inherit;background:none;letter-spacing:.18em;font:inherit;font-size:10px;font-family:Georgia,\"Noto Serif SC\",serif}\n#mast-nav [aria-current=\"page\"]::after,#mast-nav button:hover::after{content:\"\";position:absolute;bottom:5px;left:0;right:.17em;height:1px;background:#fae9cf9c}\n#mast-nav #wish-open{position:relative;right:auto;top:auto;padding:0;z-index:auto;border:none;background:none;color:inherit;text-shadow:inherit;font:inherit;font-size:10px;letter-spacing:.18em}\n#time-control{position:relative;display:block;margin-left:-3px}#time-control summary{display:grid;place-items:center;min-width:30px}#time-control summary::-webkit-details-marker{display:none}\n#time-control summary svg{display:block}#time-control[open] summary{color:#ffe5b7}\n.light-pop{position:absolute;right:-1px;top:calc(100% + 7px);width:167px;background:#30323cdf;border:1px solid #f2e7d56e;box-shadow:0 9px 28px #171b2944;color:#fff4de;padding:10px 12px;letter-spacing:.13em}\n.light-pop label{font-size:11px;display:block;margin-bottom:4px}.light-pop\u003ediv{display:flex;align-items:center;justify-content:space-between;gap:7px;font-size:10px}\n#daylight{width:104px;margin:0;accent-color:#dcb887;height:20px;cursor:pointer}\n#loading{position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);color:#fff6e3;letter-spacing:.10em;text-shadow:0 1px 5px #171b26;font-size:12px}\n#controls{position:absolute;z-index:2;inset:auto 0 0;display:grid;justify-items:center;gap:7px;padding:16px 12px max(28px,env(safe-area-inset-bottom));pointer-events:none;background:linear-gradient(0deg,#171b2864,transparent)}\n#controls .actions{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px clamp(10px,2.65vw,35px);position:relative}\n#controls button{pointer-events:auto;color:var(--ivory);letter-spacing:.12em;min-height:44px;text-shadow:0 1px 4px #181920;font-size:12px;touch-action:manipulation}\n#controls .primary{display:inline-flex;align-items:center;justify-content:center;gap:28px;padding:0 27px;border:1px solid #f4e4c683;border-radius:999px;background:#2b2f3b54;box-shadow:inset 0 0 12px #f8e9c516;min-width:168px}\n#controls .primary:hover{background:#57533e6b;border-color:#fff3db}\n#controls .secondary{border:0;background:none;padding:0;opacity:.84}#controls .secondary:hover{text-decoration:underline;text-underline-offset:7px;opacity:1}\n#controls:has(#flight-direct:not([hidden])) #mode{position:absolute;right:calc(100% + 23px);white-space:nowrap}\n#hint{min-height:17px;margin:0;font-size:12px;text-align:center;color:#f8eed9d9;text-shadow:0 1px 6px #161921;letter-spacing:.09em}\n#failure,dialog{background:#f4ebd9;color:#483d34;padding:25px;border:1px solid #e9d9c0;box-shadow:0 18px 68px #23233345}\n#failure{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:min(92vw,570px);max-height:min(83dvh,calc(100% - 95px));display:flex;flex-direction:column;gap:12px;padding:clamp(18px,4vw,38px);font-family:\"Noto Sans SC\",\"PingFang SC\",\"Microsoft YaHei\",system-ui,sans-serif}\n.fallback-heading span{font:12px Georgia,serif;letter-spacing:.25em}\n.fallback-heading p{margin:6px 0 0;font-size:13px;color:#67594d}\n#fallback-letter{overflow:auto;overscroll-behavior:contain;min-height:0;line-height:1.7}\n.fallback-actions,.letter-footer{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}\n.fallback-actions button,.letter-footer button{min-height:44px;padding:0 13px;border:1px solid #9e886e;border-radius:999px;color:#483d34;touch-action:manipulation}\n.fallback-actions button:hover,.letter-footer button:hover{color:#483d34;background:#e9dcc6}\nmain.failed :is(#controls,#orbit-actions,#letter-actions,#bell-pull,#experience,#album,#time-control){display:none}\nmain.failed #scene{visibility:hidden}\ndialog{width:min(520px,90vw);margin:auto;max-height:87dvh}dialog::backdrop{background:#e9dfc45c;backdrop-filter:blur(8px)}\n#book{background:#f3eddfef;padding:16px 24px 12px}#book::backdrop{background:#1d29366f}\n.book-top,.book-bottom{display:flex;align-items:center;justify-content:space-between}.book-top span{font-size:10px;letter-spacing:.28em}.book-top button{font-size:24px}.book-bottom button{font-size:24px}.book-bottom button:hover,.book-top button:hover{color:#876742}\n#book figure{margin:4px 0 0}\n#book figure img{display:block;width:100%;height:auto;max-height:min(54dvh,480px);object-fit:contain;background:#eae2d4}\n#book button{-webkit-tap-highlight-color:transparent}\n#book figcaption{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 12px;align-items:baseline;padding:12px 0 0}\n#caption{font-size:16px;font-weight:500;margin:0;overflow-wrap:anywhere}\n#index{white-space:nowrap;color:#776a59;letter-spacing:.15em}\n#photo-blessing{grid-column:1/-1;margin:0;color:#714d3c;font-size:15px;line-height:1.55;overflow-wrap:anywhere}\n#accessible-letter{overflow:hidden;width:min(570px,92vw);padding:clamp(18px,4vw,38px);font-size:17px;line-height:1.68;overflow-wrap:anywhere}#letter-body{white-space:pre-wrap}#letter-signature{text-align:right;font-style:italic}#letter-title{font-weight:500}\n#scene[data-phase=\"tree\"]{cursor:grab}#scene[data-phase=\"tree\"]:active{cursor:grabbing}\n@media(max-width:610px){#mast{gap:7px;padding: max(9px,env(safe-area-inset-top)) 15px 12px}#mast-nav{gap:11px}#wordmark{letter-spacing:.19em;font-size:9px;gap:6px}#wordmark span{width:13px}#mast-nav button,#mast-nav #wish-open{font-size:8px;letter-spacing:.08em}#time-control summary{min-width:21px}#time-control summary svg{width:15px;height:15px}#controls .primary{min-width:131px;padding:0 18px;gap:16px}#controls:has(#flight-direct:not([hidden])) #mode{right:calc(100% + 12px);font-size:10px}}\n@media(max-width:350px){#wordmark span{display:none}#mast{padding-inline:12px}#mast-nav{gap:8px}}\n:is(#mast,#controls,.scene-actions){transition:opacity .52s ease}\n@media (hover:hover) and (pointer:fine){\n #world:not(.failed)[data-hud=\"off\"]:not(:has(:is(#mast,#controls,.scene-actions) :focus-visible,#time-control[open])) :is(#mast,#controls,.scene-actions){opacity:0}\n #world:not(.failed)[data-hud=\"off\"]:not(:has(:is(#mast,#controls,.scene-actions) :focus-visible,#time-control[open])) :is(#mast-nav,#controls button,.scene-actions button){pointer-events:none}\n}\n#scene:not([data-ready]) ~ #controls,#scene[data-phase=\"flight\"] ~ #controls{visibility:hidden}\n@media(prefers-reduced-motion:reduce){:is(#mast,#controls,.scene-actions){transition:none}}\n#bell-pull{position:absolute;z-index:4;left:86%;top:34%;width:clamp(44px,8.5vmin,82px);height:clamp(44px,8vmin,74px);transform:translate(-50%,-50%);padding:0;border:0;border-radius:48%;background:transparent;box-shadow:none;touch-action:manipulation}\n#bell-pull:focus-visible{outline:1px dashed #ffe4a3;outline-offset:4px}\n\n#accessible-letter{font-family:\"Noto Sans CJK SC\", \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", \"WenQuanYi Micro Hei\", system-ui, sans-serif;font-weight:400}\n\n/* Letter actions are not part of the proximity-controlled scene rails. */\n.scene-actions{position:absolute;z-index:3;inset:auto max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));display:flex;justify-content:center;align-items:center;gap:8px;pointer-events:none}\n.scene-actions button{min-height:44px;padding:0 14px;border:1px solid #e2d5b5a0;border-radius:999px;touch-action:manipulation;pointer-events:auto;font-size:12px;background:#252934ed;color:#fff5e1}\n.scene-actions button:hover{background:#393c47}\n#orbit-actions{justify-content:flex-end;bottom:max(20px,env(safe-area-inset-bottom))}\n@media(max-width:380px){#orbit-actions{bottom:max(92px,calc(env(safe-area-inset-bottom) + 64px))}}\n#skip-wipe{background:#3d392f;border-color:#f1ddab}\n#skip-wipe:hover{background:#535044}\n#scene[data-phase=\"snow\"] ~ #controls{padding-bottom:calc(max(12px,env(safe-area-inset-bottom)) + 47px)}\n#scene[data-phase=\"snow\"] ~ #controls .actions{display:none}\n#scene[data-phase=\"snow\"] ~ #controls #hint{background:#252934ed;color:#fff5e1;padding:6px 10px;border-radius:6px;text-shadow:none}\n#scene[data-phase=\"letter\"] ~ #controls .primary{background:#252934ed}\n#accessible-letter[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:8px;width:min(570px,calc(100vw - 32px))}\n#letter-copy{overflow:auto;overflow-wrap:anywhere;overscroll-behavior:contain}\n#letter-copy:focus-visible{outline:1px solid #876742;outline-offset:-1px}\n\n#mast-nav #sound-toggle{font-family:serif;font-size:17px;min-width:26px;line-height:1}\n#mast-nav #sound-toggle[aria-pressed=\"false\"]{opacity:.58;text-decoration:line-through}\n\n#audio-credits{padding:14px 22px;background:#f3eddf;color:#393026}\n#audio-credits h2{font-size:16px}\n#audio-credit-list{padding-left:18px;font:14px/1.45 system-ui,sans-serif}\n#audio-credit-list li{margin-bottom:10px}\n#audio-credit-list small{display:block}\n#audio-credit-list a{color:#69421f;margin-right:12px}\n#mast-nav #audio-info{font-size:12px;min-width:20px;margin-left:-7px}\n\n#welcome{width:min(76vw,390px,110dvh);max-height:none;padding:0;overflow:visible;border:0;box-shadow:none;background:none;color:#fff4dd}\n#welcome::backdrop{background:radial-gradient(ellipse at 50% 42%,#3438463b 0%,#151a23ba 72%,#10151dd9 100%);backdrop-filter:blur(4px)}\nbody:has(#welcome[open]:not([data-opening])) :is(#mast,#controls,#bell-pull,#orbit-actions,#letter-actions,#loading,#failure){visibility:hidden}\n#open-envelope{position:relative;display:block;width:100%;padding:0;touch-action:manipulation}\n.envelope-paper{position:relative;isolation:isolate;display:block;width:100%;aspect-ratio:1.62;border-radius:3px;background:\n repeating-linear-gradient(118deg,#fff0 0 3px,#75533109 4px,#fff0 5px),\n linear-gradient(154deg,#f8eacc,#d9bc93);box-shadow:0 25px 72px #0e1118bf,0 2px 8px #17141b88;transition:transform .24s ease}\n.envelope-paper::before,.envelope-paper::after,.envelope-flap{position:absolute;inset:0;content:\"\"}\n.envelope-paper::before{background:linear-gradient(118deg,#edd8b8,#e1c39a);clip-path:polygon(0 1%,52% 60%,100% 3%,100% 100%,0 100%)}\n.envelope-paper::after{background:linear-gradient(8deg,#e8cdab,#fbedd0);clip-path:polygon(0 100%,50% 47%,100% 100%);border-radius:0 0 3px 3px}\n.envelope-flap{z-index:1;filter:drop-shadow(0 2px 2px #82623d5c)}\n.envelope-flap::before{content:\"\";position:absolute;inset:0;background:linear-gradient(173deg,#fbebcd,#e7cba3);clip-path:polygon(0 0,100% 0,55% 55%,50% 58%,45% 55%);border-radius:3px}\n.envelope-seal{position:absolute;z-index:2;left:50%;top:55%;width:clamp(41px,12vw,63px);aspect-ratio:1;display:grid;place-items:center;transform:translate(-50%,-50%) rotate(-10deg);border-radius:46% 56% 43% 54% / 49% 45% 56% 51%;background:\n radial-gradient(ellipse at 27% 16%,#d079636b 0%,#d0796300 44%),\n radial-gradient(ellipse at 62% 65%,#8e3b3d 0%,#7f3034 52%,#54242f 95%);box-shadow:1px 5px 8px #69403882,inset -2px -3px 4px #4f1b25d2,inset 2px 1px 3px #d7766290}\n.envelope-seal::before{content:\"\";position:absolute;inset:16% 15% 15% 16%;border-radius:52% 46% 49% 45%;border:2px solid #69252d80;box-shadow:0 1px 1px #db887367,inset 0 1px 2px #52202891}\n.envelope-seal::after{content:\"♪\";position:relative;color:#e3ad85;font:bold clamp(21px,7vw,33px)/1 Georgia,serif;text-shadow:0 1px #411f28,0 -1px #f0bc9238;transform:translateY(-.035em)}\n#open-envelope:hover .envelope-paper{transform:translateY(-4px)}\n#open-envelope:focus-visible{outline:none}\n#open-envelope:focus-visible .envelope-paper{box-shadow:0 25px 72px #0e1118bf,0 0 20px #ffe1a647}\n.envelope-flakes{position:absolute;inset:0;pointer-events:none}\n.envelope-flakes i{position:absolute;left:var(--left);top:var(--top);width:var(--size);aspect-ratio:1;border-radius:50%;background:#ffefd2;opacity:0}\n#welcome[data-opening]::backdrop{animation:winter-backdrop-away .76s ease forwards}\n#welcome[data-opening] #open-envelope{animation:winter-envelope-away .76s ease-in forwards;pointer-events:none}\n#welcome[data-opening] .envelope-flakes i{animation:winter-envelope-flake .76s ease-out forwards;animation-delay:var(--delay)}\n@keyframes winter-backdrop-away{to{opacity:0}}\n@keyframes winter-envelope-away{25%{opacity:.88;transform:scale(1.02)}to{opacity:0;transform:translateY(-13px) scale(1.075);filter:blur(10px)}}\n@keyframes winter-envelope-flake{0%{opacity:0}20%{opacity:.88}to{opacity:0;transform:translate(var(--x),var(--y)) scale(.35)}}\n@media(prefers-reduced-motion:reduce){\n .envelope-paper{transition:none}\n #open-envelope:hover .envelope-paper{transform:none}\n #welcome[data-opening]::backdrop,#welcome[data-opening] #open-envelope,#welcome[data-opening] .envelope-flakes i{animation:none}\n}\n\n\u003c/style\u003e\u003c/head\u003e\n\u003cbody\u003e\u003cmain id=\"world\" data-hud=\"off\"\u003e\u003ccanvas id=\"scene\" tabindex=\"0\" aria-label=\"互动雪景。拖动或按左右方向键旋转，双指、滚轮或加减键缩放，按空格展开或收拢圣诞树\"\u003e\u003c/canvas\u003e\n\u003cheader id=\"mast\"\u003e\n\u003cdiv id=\"wordmark\"\u003eA WINTER WISH\u003cspan aria-hidden=\"true\"\u003e\u003c/span\u003e\u003c/div\u003e\n\u003cnav id=\"mast-nav\" aria-label=\"雪夜来信\"\u003e\n\u003cbutton id=\"experience\" type=\"button\" aria-current=\"page\" hidden\u003eEXPERIENCE\u003c/button\u003e\n\u003cbutton id=\"album\" type=\"button\" title=\"相册\" hidden\u003eGALLERY\u003c/button\u003e\n\u003cbutton id=\"wish-open\" type=\"button\" title=\"定制信件 / 上传照片\" aria-label=\"定制信件 / 上传照片\" hidden\u003eATELIER\u003c/button\u003e\n\u003cdetails id=\"time-control\" hidden\u003e\n\u003csummary title=\"时间光线\" aria-label=\"时间光线\"\u003e\u003csvg viewBox=\"0 0 22 22\" width=\"17\" height=\"17\" aria-hidden=\"true\"\u003e\u003cpath d=\"M17.4 13.5A7 7 0 0 1 8.5 4.6 7.1 7.1 0 1 0 17.4 13.5Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.1\"/\u003e\u003cpath d=\"M15.5 4v5m-2.5-2.5h5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\".8\"/\u003e\u003c/svg\u003e\u003c/summary\u003e\n\u003cdiv class=\"light-pop\"\u003e\u003clabel for=\"daylight\"\u003e时间 · \u003coutput id=\"daylight-label\" for=\"daylight\"\u003e夜晚\u003c/output\u003e\u003c/label\u003e\u003cdiv\u003e\u003cspan aria-hidden=\"true\"\u003e昼\u003c/span\u003e\u003cinput id=\"daylight\" type=\"range\" min=\"0\" max=\"100\" step=\"1\" value=\"100\" aria-valuetext=\"夜晚\"\u003e\u003cspan aria-hidden=\"true\"\u003e夜\u003c/span\u003e\u003c/div\u003e\u003c/div\u003e\n\u003c/details\u003e\u003cbutton id=\"sound-toggle\" type=\"button\" aria-label=\"声音\" aria-pressed=\"false\" title=\"开启声音\" hidden\u003e♪\u003c/button\u003e\u003cbutton id=\"audio-info\" type=\"button\" title=\"声音来源与许可\" aria-label=\"声音来源与许可\" hidden\u003eⓘ\u003c/button\u003e\u003c/nav\u003e\n\u003c/header\u003e\n\u003cdiv id=\"loading\" role=\"status\"\u003e雪正慢慢落下…\u003c/div\u003e\n\u003csection id=\"failure\" hidden aria-label=\"雪夜来信 · 阅读版\"\u003e\n\u003cdiv class=\"fallback-heading\"\u003e\u003cspan\u003eA WINTER WISH\u003c/span\u003e\u003cp role=\"status\"\u003e当前浏览器无法显示 3D 雪景，可以在这里读信。\u003c/p\u003e\u003c/div\u003e\n\u003cdiv id=\"fallback-letter\"\u003e\u003c/div\u003e\n\u003cdiv class=\"fallback-actions\"\u003e\u003cbutton id=\"fallback-gallery\" type=\"button\" hidden\u003e查看随信照片\u003c/button\u003e\u003cbutton id=\"retry\" type=\"button\"\u003e重试雪景\u003c/button\u003e\u003c/div\u003e\n\u003c/section\u003e\n\u003cbutton id=\"bell-pull\" type=\"button\" hidden aria-label=\"点击右上方木牌，打开雪橇来信\"\u003e\u003c/button\u003e\n\u003cfooter id=\"controls\"\u003e\u003cp id=\"hint\" aria-live=\"polite\"\u003e\u003c/p\u003e\u003cdiv class=\"actions\"\u003e\u003cbutton id=\"mode\" class=\"secondary\" type=\"button\"\u003e进入雪夜\u003c/button\u003e\u003cbutton id=\"flight-direct\" class=\"primary\" type=\"button\" hidden disabled\u003e\u003cspan\u003e雪橇来信\u003c/span\u003e\u003cspan aria-hidden=\"true\"\u003e→\u003c/span\u003e\u003c/button\u003e\u003cbutton id=\"read\" class=\"primary\" type=\"button\" hidden\u003e读完整来信\u003c/button\u003e\u003cbutton id=\"canvas-letter-exit\" class=\"secondary\" type=\"button\" hidden\u003e返回圣诞树\u003c/button\u003e\u003cbutton id=\"replay\" class=\"secondary\" type=\"button\" hidden\u003e再看一遍\u003c/button\u003e\u003c/div\u003e\u003c/footer\u003e\n\u003cnav id=\"orbit-actions\" class=\"scene-actions\" hidden aria-label=\"照片操作\"\u003e\u003cbutton id=\"random-photo\" type=\"button\" hidden\u003e随机抓一张\u003c/button\u003e\u003c/nav\u003e\n\u003cnav id=\"letter-actions\" class=\"scene-actions\" hidden aria-label=\"来信操作\"\u003e\u003cbutton id=\"skip-wipe\" type=\"button\"\u003e直接读信\u003c/button\u003e\u003cbutton id=\"return-tree\" type=\"button\"\u003e返回圣诞树\u003c/button\u003e\u003c/nav\u003e\n\u003cdialog id=\"accessible-letter\" aria-label=\"完整来信\"\u003e\u003cdiv class=\"book-top\"\u003e\u003cspan\u003eA WINTER WISH\u003c/span\u003e\u003cbutton id=\"close-letter\" aria-label=\"关闭来信\"\u003e×\u003c/button\u003e\u003c/div\u003e\u003carticle id=\"letter-copy\" tabindex=\"0\" aria-label=\"来信正文\"\u003e\u003ch1 id=\"letter-title\"\u003e\u003c/h1\u003e\u003cp id=\"letter-recipient\"\u003e\u003c/p\u003e\u003cp id=\"letter-body\"\u003e\u003c/p\u003e\u003cp id=\"letter-signature\"\u003e\u003c/p\u003e\u003c/article\u003e\u003cdiv class=\"letter-footer\"\u003e\u003cbutton id=\"letter-return-tree\" type=\"button\"\u003e返回圣诞树\u003c/button\u003e\u003c/div\u003e\u003c/dialog\u003e\n\u003cdialog id=\"audio-credits\" aria-labelledby=\"audio-credits-title\"\u003e\u003cdiv class=\"book-top\"\u003e\u003ch2 id=\"audio-credits-title\"\u003e声音来源与许可\u003c/h2\u003e\u003cbutton id=\"close-audio-credits\" aria-label=\"关闭声音来源与许可\"\u003e×\u003c/button\u003e\u003c/div\u003e\u003cul id=\"audio-credit-list\"\u003e\u003c/ul\u003e\u003c/dialog\u003e\n\u003cdialog id=\"book\" aria-label=\"冬日相册\"\u003e\u003cdiv class=\"book-top\"\u003e\u003cspan\u003eTHE WINTER GALLERY\u003c/span\u003e\u003cbutton id=\"close\" aria-label=\"关闭相册\"\u003e×\u003c/button\u003e\u003c/div\u003e\u003cfigure\u003e\u003cimg id=\"print\" alt=\"\"\u003e\u003cfigcaption\u003e\u003ch2 id=\"caption\"\u003e\u003c/h2\u003e\u003csmall id=\"index\"\u003e\u003c/small\u003e\u003cp id=\"photo-blessing\" hidden\u003e\u003c/p\u003e\u003c/figcaption\u003e\u003c/figure\u003e\u003cdiv class=\"book-bottom\"\u003e\u003cbutton id=\"prev\" aria-label=\"上一张\"\u003e‹\u003c/button\u003e\u003cbutton id=\"next\" aria-label=\"下一张\"\u003e›\u003c/button\u003e\u003c/div\u003e\u003c/dialog\u003e\n\u003c/main\u003e\n\u003cdialog id=\"welcome\" aria-label=\"雪夜来信\"\u003e\n\u003cbutton id=\"open-envelope\" type=\"button\" aria-label=\"拆信 · 开启音乐\"\u003e\n\u003cspan class=\"envelope-paper\" aria-hidden=\"true\"\u003e\u003cspan class=\"envelope-flap\"\u003e\u003c/span\u003e\u003cspan class=\"envelope-seal\"\u003e\u003c/span\u003e\u003c/span\u003e\n\u003c/button\u003e\n\u003cspan class=\"envelope-flakes\" aria-hidden=\"true\"\u003e\u003c/span\u003e\n\u003c/dialog\u003e\n\u003c!-- WISH_PAYLOAD --\u003e\u003cscript type=\"application/json\" id=\"wish-data\"\u003e@@WISH_DATA_08@@\u003c/script\u003e\n\u003cscript id=\"wish-shell\" type=\"application/json\"\u003e@@WISH_SHELL_08@@\u003c/script\u003e@@WISH_RUNTIME_08@@\n\u003c/body\u003e\u003c/html\u003e\n"</script><script id="wish-runtime">
 
 window.buildWinterHTML=(json)=>{
  const shellNode=document.getElementById('wish-shell');
@@ -161,13 +167,17 @@ window.buildWinterHTML=(json)=>{
 /* Winter stationery studio. No external resources; original files never leave this browser. */
 ;(function(global){
 'use strict';
-const LIMIT=24,defaults={title:'一封冬日来信',recipient:'亲爱的朋友：',body:'这一年，有些瞬间像雪，轻轻落下，却一直没有融化。\n\n把它们挂在这棵树上，送给此刻读信的你。愿你在每一个寒冷的夜晚，都有一盏为你亮着的灯。',signature:'圣诞快乐'};
+const LIMIT=24,PHOTO_LONG_EDGE=1600,PHOTO_CAPTION_LIMIT=64,defaults={title:'一封冬日来信',recipient:'亲爱的朋友：',body:'这一年，有些瞬间像雪，轻轻落下，却一直没有融化。\n\n把它们挂在这棵树上，送给此刻读信的你。愿你在每一个寒冷的夜晚，都有一盏为你亮着的灯。',signature:'圣诞快乐'};
 const bounds={title:48,recipient:60,body:1800,signature:70};
 const DRAFT_FORMAT='A Winter Wish Draft',DRAFT_STORE='drafts';
 const safeJSON=x=>JSON.stringify(x).replace(/[<>&\u2028\u2029]/g,c=>'\\u'+c.charCodeAt(0).toString(16).padStart(4,'0'));
 function normalize(raw={}){
  raw=raw||{};let letter={};for(const k in defaults)letter[k]=typeof raw.letter?.[k]==='string'?raw.letter[k].slice(0,bounds[k]):defaults[k];
- const photos=(Array.isArray(raw.photos)?raw.photos:[]).slice(0,LIMIT).filter(x=>x&&typeof x.src==='string'&&/^data:image\/(jpeg|png|webp);base64,[A-Za-z\d+/]+=*$/i.test(x.src)).map(p=>({src:p.src,name:String(p.name||'冬日照片').slice(0,140),w:Math.max(1,Math.min(1600,Number(p.w)||1)),h:Math.max(1,Math.min(1600,Number(p.h)||1))}));
+ const photos=(Array.isArray(raw.photos)?raw.photos:[]).slice(0,LIMIT).filter(x=>x&&typeof x.src==='string'&&/^data:image\/(jpeg|png|webp);base64,[A-Za-z\d+/]+=*$/i.test(x.src)).map(p=>{
+  const photo={src:p.src,name:String(p.name||'冬日照片').slice(0,140),w:Math.max(1,Math.min(PHOTO_LONG_EDGE,Number(p.w)||1)),h:Math.max(1,Math.min(PHOTO_LONG_EDGE,Number(p.h)||1))};
+  if(typeof p.caption==='string'&&p.caption)photo.caption=p.caption.slice(0,PHOTO_CAPTION_LIMIT);
+  return photo;
+ });
  return {version:1,mode:raw.mode==='share'?'share':'creator',photos,letter};
 }
 function openDraftStore(){
@@ -196,7 +206,8 @@ async function readBackup(file){
  const validLetter=Object.keys(bounds).every(key=>value.letter?.[key]===draft.letter[key]);
  const validPhotos=Array.isArray(value.photos)&&value.photos.length===draft.photos.length&&value.photos.every((photo,i)=>{
   const item=draft.photos[i];
-  return photo.name===item.name&&photo.w===item.w&&photo.h===item.h;
+  return photo.name===item.name&&photo.w===item.w&&photo.h===item.h&&
+   (photo.caption===undefined||photo.caption===(item.caption??''));
  });
  if(!validLetter||!validPhotos)throw Error('草稿的照片或信件内容不完整。');
  return draft;
@@ -207,17 +218,26 @@ async function encode(file){
  try{
   if(typeof createImageBitmap==='function'){try{image=await createImageBitmap(file,{imageOrientation:'from-image'})}catch{}}
   if(!image){url=URL.createObjectURL(file);image=new Image();image.src=url;await image.decode()}
-  let w=image.naturalWidth||image.width,h=image.naturalHeight||image.height,scale=Math.min(1,1440/Math.max(w,h));c=document.createElement('canvas');c.width=Math.max(1,Math.round(w*scale));c.height=Math.max(1,Math.round(h*scale));
+  const w=image.naturalWidth||image.width,h=image.naturalHeight||image.height,scale=Math.min(1,PHOTO_LONG_EDGE/Math.max(w,h));c=document.createElement('canvas');c.width=Math.max(1,Math.round(w*scale));c.height=Math.max(1,Math.round(h*scale));
   const ctx=c.getContext('2d',{alpha:false});ctx.fillStyle='#f4f0e7';ctx.fillRect(0,0,c.width,c.height);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(image,0,0,c.width,c.height);
-  return {name:file.name.replace(/\.[^.]*$/,'').slice(0,140)||'冬日照片',w:c.width,h:c.height,src:c.toDataURL('image/jpeg',.84)};
+  return {name:file.name.replace(/\.[^.]*$/,'').slice(0,140)||'冬日照片',w:c.width,h:c.height,src:c.toDataURL('image/jpeg',.92)};
  }finally{image?.close?.();if(url)URL.revokeObjectURL(url);if(c){c.width=c.height=1}}
 }
 const css=`
 #wish-open{position:fixed;right:max(24px,env(safe-area-inset-right));top:max(26px,env(safe-area-inset-top));z-index:8;font:12px Georgia,"Songti SC",serif;letter-spacing:.12em;color:#fffcf1;text-shadow:0 1px 5px #332e28;background:rgba(49,48,43,.42);border:1px solid #fff6;border-radius:0;padding:7px 13px;cursor:pointer}
 #wish-studio{box-sizing:border-box;position:fixed;inset:0 0 0 auto;margin:0;max-width:100vw;width:420px;height:100dvh;max-height:100dvh;overflow:auto;border:0;border-left:1px solid #c9c4b8;padding:26px 26px 34px;background:#f5f2ea;color:#38392f;text-align:left;font:14px/1.5 system-ui,sans-serif;box-shadow:-14px 0 60px #322d241a;color-scheme:light}
 #wish-studio *{box-sizing:border-box}#wish-studio::backdrop{background:#25262058}#wish-studio h2{font:normal 30px/1.2 Georgia,"Songti SC",serif;letter-spacing:.05em;margin:4px 0 20px;color:#3c4138}#wish-studio .kicker{font:10px Georgia,serif;letter-spacing:.24em;color:#767667}#wish-studio .top{display:flex;justify-content:space-between;align-items:center}#wish-studio button{font:inherit;color:inherit;border-radius:0;cursor:pointer;background:none;border:1px solid #bcb9a9;padding:7px 11px}#wish-studio button:disabled{opacity:.4;cursor:default}#wish-studio .x{border:none;font-size:24px;padding:0 5px}
-#wish-studio .drop{border:1px dashed #9c9f8b;padding:14px;width:100%;color:#435146;background:#ebece2}#wish-studio .drop.over{border:2px solid #5c6856}#wish-studio .info{font-size:12px;color:#66695d;margin:8px 0}#wish-studio .rows{max-height:205px;overflow-y:auto}#wish-studio .row{display:flex;align-items:center;gap:5px;padding:6px 0;border-bottom:1px solid #d6d4c7}
-#wish-studio .row img{width:48px;height:40px;object-fit:contain;background:#e0ddd1}#wish-studio .name{flex:1;min-width:1em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px}#wish-studio .row button{padding:3px 5px;font-size:12px}#wish-studio label{display:block;margin:12px 0 3px;font-size:12px;letter-spacing:.08em}#wish-studio input:not([type=file]),#wish-studio textarea{width:100%;display:block;color:#32362d;background:#fffdf8;border:1px solid #cecabb;padding:8px;font:14px/1.55 Georgia,"Songti SC",serif;border-radius:0}#wish-studio textarea{resize:vertical;min-height:100px}#wish-studio .actions{display:flex;gap:10px;align-items:center;margin-top:12px}#wish-studio .save{background:#3b4d40;color:#fffcf3;border-color:#3b4d40}#wish-studio .status{min-height:1.5em;color:#63563d;font-size:12px}#wish-studio :focus-visible,#wish-open:focus-visible{outline:2px solid #875730;outline-offset:2px}
+#wish-studio .drop{border:1px dashed #9c9f8b;padding:14px;width:100%;color:#435146;background:#ebece2}#wish-studio .drop.over{border:2px solid #5c6856}#wish-studio .info{font-size:12px;color:#66695d;margin:8px 0}
+#wish-studio .rows{max-height:min(38dvh,325px);overflow-y:auto}
+#wish-studio .row{display:grid;grid-template-columns:48px minmax(0,1fr);align-items:start;gap:8px;padding:8px 2px;border-bottom:1px solid #d6d4c7}
+#wish-studio .row img{width:48px;height:40px;object-fit:contain;background:#e0ddd1}
+#wish-studio .photo-line{display:flex;align-items:center;gap:4px;margin-bottom:5px}
+#wish-studio .name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px}
+#wish-studio .row button{flex:none;padding:3px 5px;font-size:12px}
+#wish-studio label{display:block;margin:12px 0 3px;font-size:12px;letter-spacing:.08em}
+#wish-studio input:not([type=file]),#wish-studio textarea{width:100%;display:block;color:#32362d;background:#fffdf8;border:1px solid #cecabb;padding:8px;font:14px/1.55 Georgia,"Songti SC",serif;border-radius:0}
+#wish-studio input.photo-caption{padding:6px 8px;font-size:16px}
+#wish-studio textarea{resize:vertical;min-height:100px}#wish-studio .actions{display:flex;gap:10px;align-items:center;margin-top:12px}#wish-studio .save{background:#3b4d40;color:#fffcf3;border-color:#3b4d40}#wish-studio .status{min-height:1.5em;color:#63563d;font-size:12px}#wish-studio :focus-visible,#wish-open:focus-visible{outline:2px solid #875730;outline-offset:2px}
 #wish-studio .draft-tools{border-top:1px solid #d6d4c7;padding:8px 0 0}#wish-studio .draft-tools .actions{flex-wrap:wrap;gap:6px;margin-top:6px}#wish-studio .draft-tools button{font-size:12px;padding:5px 8px}#wish-studio .draft-confirm{margin-top:10px;padding:0 10px 10px;background:#ece8dd;display:flow-root}
 @media(max-width:600px){#wish-open{top:18px;right:15px}#wish-studio{padding:max(18px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) max(18px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left))}}
 `;
@@ -243,7 +263,7 @@ function init({onPhotos=()=>{},onLetter=()=>{},onPreview=()=>{},buildHTML,data,o
  draftStatus.id='wish-draft-state';draftInput.id='wish-draft-file';draftInput.type='file';draftInput.accept='.json,application/json';draftInput.hidden=true;
  const confirmation=el('div',undefined,'draft-confirm'),confirmText=el('p','','info'),confirm=el('button','确认'),cancel=el('button','取消');
  confirmation.hidden=true;confirmation.append(confirmText,confirm,cancel);draftActions.append(downloadDraft,uploadDraft,clearDraft);tools.append(draftStatus,draftActions,draftInput,confirmation);dialog.append(tools);
- let busy=false,rep=-1,baseBytes=0,photoBytes=0;
+ let busy=false,rep=-1,baseBytes=0,photoBytes=0,photoCaptionTimer=0;
  const database=openDraftStore(),key=global.location?.pathname||'creator';
  const letterKey=[key,'letter'],photosKey=[key,'photos'];
  const initial=normalize(raw),photoButtons=[];
@@ -253,7 +273,10 @@ function init({onPhotos=()=>{},onLetter=()=>{},onPreview=()=>{},buildHTML,data,o
  draftStatus.textContent=restoring?'正在读取本机草稿…':noStorage;
  const payload=()=>safeJSON({...state,mode:'share'});
  const blocked=()=>busy||restoring;
- const hasEdits=()=>state.photos.length!==initial.photos.length||state.photos.some((photo,i)=>photo.src!==initial.photos[i]?.src||photo.name!==initial.photos[i]?.name)||Object.keys(bounds).some(k=>state.letter[k]!==initial.letter[k]);
+ const hasEdits=()=>state.photos.length!==initial.photos.length||state.photos.some((photo,i)=>{
+  const first=initial.photos[i];
+  return photo.src!==first?.src||photo.name!==first?.name||photo.caption!==first?.caption;
+ })||Object.keys(bounds).some(k=>state.letter[k]!==initial.letter[k]);
  function syncControls(){
   const disabled=blocked();
   for(const field of Object.values(fields))field.disabled=restoring;
@@ -309,15 +332,34 @@ function init({onPhotos=()=>{},onLetter=()=>{},onPreview=()=>{},buildHTML,data,o
  async function measure(){if(!buildHTML)return;try{const src=await buildHTML('{}');baseBytes=(src instanceof Blob?src.size:new Blob([src]).size)-2;estimate()}catch{size.textContent='导出时计算实际文件大小'}}
  function paint(){
   count.textContent=state.photos.length+' / '+LIMIT+' 张 · 图片仅在本机处理'+(!state.photos.length?'。未添加时展示冬日插画。':'。');rows.replaceChildren();photoButtons.length=0;
-  state.photos.forEach((p,i)=>{const row=el('div',undefined,'row'),img=el('img'),name=el('span',p.name,'name');img.alt=p.name;img.src=p.src;row.append(img,name);
-   const btn=(s,label,fn,disabled=false)=>{const b=el('button',s);b.title=label;b.setAttribute('aria-label',label+'：'+p.name);b.onclick=fn;row.append(b);photoButtons.push([b,disabled])};
+  state.photos.forEach((p,i)=>{
+   const row=el('div',undefined,'row'),img=el('img'),name=el('span',p.name,'name');
+   const details=el('div'),line=el('div',undefined,'photo-line'),caption=el('input',undefined,'photo-caption');
+   img.alt=p.name;img.src=p.src;line.append(name);
+   caption.type='text';caption.id='wish-photo-caption-'+i;caption.maxLength=PHOTO_CAPTION_LIMIT;
+   caption.placeholder='相框文字（选填）';caption.value=p.caption??'';caption.setAttribute('aria-label','相框文字：'+p.name);
+   caption.addEventListener('input',()=>{
+    const photo={...state.photos[i]},text=caption.value.slice(0,PHOTO_CAPTION_LIMIT);
+    if(text===(photo.caption??''))return;
+    if(text)photo.caption=text;else delete photo.caption;
+    state.photos[i]=photo;countPhotoBytes();estimate();syncControls();
+    clearTimeout(photoCaptionTimer);
+    photoCaptionTimer=setTimeout(flushCaptionEdits,280);
+   });
+   caption.addEventListener('change',flushCaptionEdits);
+   photoButtons.push([caption,false]);
+   const btn=(s,label,fn,disabled=false)=>{const b=el('button',s);b.title=label;b.setAttribute('aria-label',label+'：'+p.name);b.onclick=fn;line.append(b);photoButtons.push([b,disabled])};
    const move=j=>{[state.photos[i],state.photos[j]]=[state.photos[j],state.photos[i]];changed()};
-   btn('↑','上移',()=>move(i-1),i===0);btn('↓','下移',()=>move(i+1),i===state.photos.length-1);btn('换','替换',()=>{rep=i;replaceInput.click()});btn('删','删除',()=>{state.photos.splice(i,1);changed()});rows.append(row);
+   btn('↑','上移',()=>move(i-1),i===0);btn('↓','下移',()=>move(i+1),i===state.photos.length-1);btn('换','替换',()=>{rep=i;replaceInput.click()});btn('删','删除',()=>{state.photos.splice(i,1);changed()});
+   details.append(line,caption);row.append(img,details);rows.append(row);
   });syncControls();estimate();
  }
  function countPhotoBytes(){photoBytes=state.photos.reduce((n,p)=>n+new Blob([safeJSON({...p,src:''})]).size+p.src.length,0)+Math.max(0,state.photos.length-1)}
- function changed(){countPhotoBytes();paint();emitPhotos();persistDraft(true)}
+ function stopCaptionTimer(){clearTimeout(photoCaptionTimer);photoCaptionTimer=0;}
+ function flushCaptionEdits(){if(photoCaptionTimer){stopCaptionTimer();emitPhotos();persistDraft(true);}}
+ function changed(){stopCaptionTimer();countPhotoBytes();paint();emitPhotos();persistDraft(true)}
  function applyDraft(draft){
+  stopCaptionTimer();
   state.letter={...draft.letter};state.photos=draft.photos.slice();
   for(const [key,field] of Object.entries(fields))field.value=state.letter[key];
   countPhotoBytes();paint();emitLetter();emitPhotos();
@@ -359,15 +401,26 @@ function init({onPhotos=()=>{},onLetter=()=>{},onPreview=()=>{},buildHTML,data,o
  async function ingest(files,index=-1){
   if(blocked())return;const total=files.length,cap=index>=0?1:LIMIT-state.photos.length,queue=Array.from(files).slice(0,Math.max(0,cap));if(!queue.length){status.textContent='最多可放入 '+LIMIT+' 张照片。';return}
   finishConfirmation();busy=true;syncControls();let ok=0,err=0;
-  try{for(const f of queue){status.textContent='正在处理 '+(ok+err+1)+' / '+queue.length+'…';try{const p=await encode(f);if(index>=0)state.photos[index]=p;else state.photos.push(p);ok++}catch{err++}}}
+  try{for(const f of queue){
+   status.textContent='正在处理 '+(ok+err+1)+' / '+queue.length+'…';
+   try{
+    const p=await encode(f);
+    if(index>=0){
+     if(state.photos[index]?.caption)p.caption=state.photos[index].caption;
+     state.photos[index]=p;
+    }else state.photos.push(p);
+    ok++;
+   }catch{err++}
+  }}
   finally{busy=false;input.value=replaceInput.value='';rep=-1;if(ok)changed();else syncControls();status.textContent='已处理 '+ok+' 张。'+(err?'有 '+err+' 张无法读取，请使用 JPG、PNG 或 WebP。':'')+(total>queue.length?'超出数量限制的照片未加入。':'')}
  }
  input.onchange=()=>ingest(input.files);replaceInput.onchange=()=>ingest(replaceInput.files,rep);drop.onclick=()=>input.click();
  dialog.addEventListener('dragover',e=>{if(e.dataTransfer?.types?.includes('Files')){e.preventDefault();drop.classList.add('over')}});dialog.addEventListener('dragleave',()=>drop.classList.remove('over'));dialog.addEventListener('drop',e=>{e.preventDefault();drop.classList.remove('over');if(e.dataTransfer?.files?.length)ingest(e.dataTransfer.files)});
- open.onclick=()=>{dialog.showModal();if(!baseBytes)measure()};close.onclick=()=>dialog.close();preview.onclick=()=>{dialog.close();onPreview()};
+ open.onclick=()=>{dialog.showModal();if(!baseBytes)measure()};close.onclick=()=>dialog.close();preview.onclick=()=>{flushCaptionEdits();dialog.close();onPreview()};
+ dialog.addEventListener('close',flushCaptionEdits);
  save.onclick=async()=>{if(blocked())return;finishConfirmation();busy=true;syncControls();status.textContent='正在封装独立文件…';try{if(!buildHTML)throw Error();const file=await buildHTML(payload());if(!file)throw Error();const blob=file instanceof Blob?file:new Blob([file],{type:'text/html;charset=utf-8'});download(blob,'A_Winter_Wish_Gift.html');status.textContent='已生成 '+(blob.size/1048576).toFixed(2)+' MB 的分享版，可将下载的 HTML 直接发送给对方。'}catch{status.textContent='文件生成失败，请在完整的单文件创作版中重试。'}finally{busy=false;syncControls()}};
  countPhotoBytes();paint();if(database)void restoreDraft();
- return {getData,open:()=>open.click(),close:()=>dialog.close(),dispose:()=>{disposed=true;database?.then(db=>db.close(),()=>{});dialog.remove();style.remove();if(!opener)open.remove()}};
+ return {getData,open:()=>open.click(),close:()=>dialog.close(),dispose:()=>{disposed=true;stopCaptionTimer();database?.then(db=>db.close(),()=>{});dialog.remove();style.remove();if(!opener)open.remove()}};
 }
 global.WinterPersonalize=Object.freeze({init,normalize,safeJSON,encode,LIMIT});
 })(globalThis);
@@ -1439,165 +1492,128 @@ return {makeFir};
 })();
 
 const $m3=(()=>{
-const memories=[
- {title:'树下的第一盏灯',caption:'冬日插画 · 和家人一起装饰圣诞树'},
- {title:'晚灯还亮着',caption:'冬日插画 · 窗边读到最后一页'},
- {title:'雪落在屋檐上',caption:'冬日插画 · 山脚下亮着灯的小屋'},
- {title:'一路灯光',caption:'冬日插画 · 从街灯下慢慢走回家'},
- {title:'烤箱里的香气',caption:'冬日插画 · 一起做一盘姜饼'},
- {title:'冰面上的一圈',caption:'冬日插画 · 湖冻住以后'},
- {title:'窗外下起雪',caption:'冬日插画 · 晚归时的一盏灯',scene:2},
- {title:'街角的花环',caption:'冬日插画 · 冬天散步的街角',scene:3},
- {title:'树上的星星',caption:'冬日插画 · 把星星挂上去',scene:0},
- {title:'留一块给你',caption:'冬日插画 · 甜点与暖光',scene:4},
- {title:'最后一页',caption:'冬日插画 · 一个安静的下午',scene:1},
- {title:'湖边等月亮',caption:'冬日插画 · 结冰的湖面',scene:5},
- {title:'炉火的颜色',caption:'冬日插画 · 路的那一边',scene:2},
- {title:'雪后的脚印',caption:'冬日插画 · 串成一条回家的路',scene:3},
- {title:'湖上的一轮月',caption:'冬日插画 · 银色月光落在湖面',scene:6},
- {title:'山脊的第一道光',caption:'冬日插画 · 等到天亮',scene:7},
- {title:'桥边的灯',caption:'冬日插画 · 通往山里的桥',scene:8},
- {title:'邮局的红门',caption:'冬日插画 · 有人替你留着灯',scene:9},
- {title:'雪松小径',caption:'冬日插画 · 走在松枝之间',scene:10},
- {title:'村庄的暖窗',caption:'冬日插画 · 山谷里的一排灯',scene:11}
+const cards=[
+ ['树下的第一盏灯','愿这盏树灯，','照着我们在来年再见。'],
+ ['晚灯还亮着','愿你读到喜欢的故事时，','天色还早，茶还热。'],
+ ['雪落在屋檐上','愿你的窗外有雪，','门一开就是暖意。'],
+ ['一路灯光','愿冬天再长，','回家的路也一路有灯。'],
+ ['烤箱里的香气','愿今年的好消息，','像刚出炉的姜饼一样多。'],
+ ['冰面上的一圈','愿你偶尔忘了赶路，','只顾着笑。'],
+ ['窗外下起雪','愿每场突如其来的落雪，','都有人陪你看。'],
+ ['街角的花环','愿某个寻常的街角，','恰好遇见想念的人。'],
+ ['树上的星星','愿你亲手挂起的那颗星，','照亮下一个心愿。'],
+ ['留一块给你','愿所有甜的东西，','都有人记得给你留一块。'],
+ ['最后一页','愿合上今年这一页时，','你对自己说一声做得好。'],
+ ['湖边等月亮','愿有人陪你把话说完，','也陪你等月亮升起来。'],
+ ['炉火的颜色','愿你在最冷的一天，','仍能找到让自己暖和的事。'],
+ ['雪后的脚印','愿你的脚印里','多一些喜欢的方向。'],
+ ['湖上的一轮月','愿被月光铺满的夜晚，','给你一个踏实的好梦。'],
+ ['山脊的第一道光','愿天亮时，','你有一件小事值得期待。'],
+ ['桥边的灯','愿你走过的桥，','通向想见的人和想去的地方。'],
+ ['邮局的红门','愿你寄出的每一份惦念，','都收到温柔回音。'],
+ ['雪松小径','愿你走得从容，','听得见脚下松软的雪。'],
+ ['村庄的暖窗','愿远远望见的那扇暖窗，','永远有你的位置。']
 ];
-const W=480,H=336, cache=[];
-function seeded(s){return ()=>{s=Math.imul(1664525,s)+1013904223|0;return (s>>>0)/4294967296;}}
-function gradient(c,stops,x=0,y=0,xx=0,yy=H){let g=c.createLinearGradient(x,y,xx,yy);stops.forEach(([i,col])=>g.addColorStop(i,col));return g;}
-function disk(c,x,y,rx,ry,f,a=0){c.beginPath();c.ellipse(x,y,Math.max(.05,rx),Math.max(.05,ry),a,0,Math.PI*2);c.fillStyle=f;c.fill();}
-function poly(c,pts,f){c.beginPath();pts.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();c.fillStyle=f;c.fill();}
-function line(c,pts,f,w=1){c.beginPath();pts.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.strokeStyle=f;c.lineWidth=w;c.lineCap='round';c.lineJoin='round';c.stroke();}
-function glow(c,x,y,r,f,int=.4,sy=1){c.save();c.translate(x,y);c.scale(1,sy);let g=c.createRadialGradient(0,0,0,0,0,r);g.addColorStop(0,`rgba(${f},${int})`);g.addColorStop(.26,`rgba(${f},${int*.61})`);g.addColorStop(1,`rgba(${f},0)`);disk(c,0,0,r,r,g);c.restore();}
-function pine(c,x,b,h,rad,r,{christmas=false,snow=false,far=false}={}){
- const trunk=far?'#303c3c':'#3d2a23';line(c,[[x,b-h],[x,b+4]],trunk,h*.024);
- let tips=[];
- for(let j=13;j>0;j--){let q=j/14,y=b-h+q*h;let a=rad*Math.pow(q,.72)*(0.8+r()*.25);
-  for(let k=0;k<13;k++){let d=r()*2-1;let l=(r()*.5+.5)*a;let dx=d*l, dy=(.1+r()*.27)*l;
-   const green=far?['#37474a','#465557','#303b3f']:['#1e2d23','#29382a','#3e4830','#19291f'];
-   line(c,[[x,y-a*.18],[x+dx*.52,y+dy*.28],[x+dx,y+dy]],green[(r()*green.length)|0],1+h*.012);
-   for(let k2=0;k2<6;k2++){let p=.24+r()*.7;let xx=x+dx*p, yy=y+dy*p;
-    line(c,[[xx,yy],[xx+dx*.18+(r()-.5)*a*.18,yy+(r()-.37)*a*.26]],green[(r()*green.length)|0],.4+h*.003);
-   }
-   if(snow&&r()<.63)line(c,[[x+dx*.35,y+dy*.09],[x+dx*.63,y+dy*.42],[x+dx*.94,y+dy*.84]],far?'rgba(148,159,158,.23)':'rgba(181,190,182,.54)',.7+h*.008);
-   if(christmas&&r()<.31) tips.push([x+dx*.95,y+dy*.82]);
-  }
- }
- if(christmas){tips.forEach(([x,y])=>{ glow(c,x,y,11,'250,180,82',.27);disk(c,x,y,1+r()*1.1,1.3,'#ffdb9f');if(r()<.16) disk(c,x,y+6,3,3,r()<.58?'#9e331d':'#bb8650'); });glow(c,x,b-h,30,'255,183,85',.49);
- poly(c,Array.from({length:10},(_,i)=>{let a=i*Math.PI/5-Math.PI/2,rr=i%2?3.2:8;return[x+Math.cos(a)*rr,b-h+Math.sin(a)*rr];}),'#ffe7a9');}
+const memories=cards.map(([title,...lines])=>({title,caption:lines.join(''),lines}));
+const blessings=[
+ ...memories.map(memory=>memory.caption),
+ '愿冬天替你把这一刻留得久一些。',
+ '愿新的一年，有足够多的日子值得拍照。',
+ '愿你想到今天时，还能想起当时的笑声。',
+ '愿这张照片里的人，在来年也能站在一起。'
+];
+function photoBlessing(title,index=0){
+ const match=memories.find(memory=>memory.title===title);
+ const slot=Number.isFinite(index)?Math.trunc(index):0;
+ return match?.caption??blessings[(slot%blessings.length+blessings.length)%blessings.length];
 }
-function figure(c,x,y,s,{coat='#68382d',hat='#762f2c',facing=1,reach=false,skate=false,sit=false,skin='#bc896c',apron=false}={}){
- c.save();c.translate(x,y);c.scale(s*facing,s);
- const shaded=gradient(c,[[0,'#262328'],[.4,coat],[1,'#b58161']],-18,0,28,0);
- glow(c,0,3,22,'25,18,17',.6,.18);
- if(skate){line(c,[[-4,-31],[-17,-12],[-29,-10]],'#30333b',8);line(c,[[7,-32],[15,-19],[31,-30]],'#363840',8);line(c,[[-39,-8],[-22,-7]],'#9da5aa',2);line(c,[[26,-28],[36,-34]],'#aeb5b6',2);}
- else if(sit){line(c,[[-3,-28],[16,-25],[20,-2]],'#2a282a',9);line(c,[[20,-2],[30,-2]],'#453c35',5);}
- else{line(c,[[-8,-31],[-9,-5],[-15,-3]],'#343137',10);line(c,[[7,-32],[9,-5],[19,-4]],'#2a2829',10);}
- poly(c,[[-9,-72],[9,-69],[14,-58],[15,-33],[11,-25],[-16,-27],[-18,-36],[-14,-57]],shaded);
- line(c,[[-12,-66],[-16,-50],[-19,-42]],'#4c3938',8);
- if(apron)poly(c,[[1,-67],[8,-65],[8,-53],[13,-31],[1,-28],[-5,-49]],'#cfa879');
- let arm=reach?[[9,-65],[19,-58],[32,-78]]:skate?[[9,-66],[24,-66],[33,-74]]:[[9,-65],[15,-47],[23,-45]];
- line(c,arm,coat,9);line(c,arm.map(([x,y])=>[x+1,y-2]),'#9c715d',2);disk(c,...arm[2],4,4,skin);
- line(c,[[-8,-70],[5,-67],[12,-71]],hat,6);
- disk(c,1,-82,11,13,gradient(c,[[0,'#64473f'],[.48,skin],[1,'#ddae81']],-10,-82,12,-82),.13);
- poly(c,[[8,-86],[13,-81],[9,-80]],'#d6a381');disk(c,6,-85,1.2,1,'#493833');line(c,[[7,-77],[10,-78]],'#885c58',.7);
- disk(c,-4,-88,8,11,hat,-.4);line(c,[[-12,-87],[8,-91]],'#d29c78',2);
+
+const W=480,H=336,RESOLUTION=2,cache=[];
+const CJK='"Kaiti SC",KaiTi,STKaiti,"Songti SC","Noto Serif CJK SC","Noto Serif SC",SimSun,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Noto Sans SC","WenQuanYi Zen Hei",serif';
+const palettes=[
+ {light:'#fffdf4',shade:'#f0e3d0',ink:'#70263b',accent:'#a66e37',line:'#a7634f52',sprig:'#627865',berry:'#b44754',grain:'#ac79691c'},
+ {light:'#ca455b',shade:'#94243d',ink:'#fff8e8',accent:'#ffdb9c',line:'#ffdfa56b',sprig:'#f9dfb3',berry:'#fff5d8',grain:'#ffedce25'},
+ {light:'#fff0bf',shade:'#ebc469',ink:'#622d2b',accent:'#9d592b',line:'#b96b3954',sprig:'#947140',berry:'#ac4950',grain:'#ad603823'}
+];
+const paletteSequence=[0,1,0,2,2,0,1,2,1,0,2,0,1,0,0,2,2,1,0,2];
+function seeded(s){return ()=>{s=Math.imul(1664525,s)+1013904223|0;return (s>>>0)/4294967296;}}
+function rule(c,x,y,xx,yy){
+ c.beginPath();c.moveTo(x,y);c.lineTo(xx,yy);c.stroke();
+}
+function sealStar(c,x,y,size){
+ c.beginPath();
+ c.moveTo(x,y-size);c.quadraticCurveTo(x+size*.15,y-size*.15,x+size,y);
+ c.quadraticCurveTo(x+size*.15,y+size*.15,x,y+size);
+ c.quadraticCurveTo(x-size*.15,y+size*.15,x-size,y);
+ c.quadraticCurveTo(x-size*.15,y-size*.15,x,y-size);c.fill();
+}
+function dot(c,x,y,r){
+ c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.fill();
+}
+function evergreen(c,x,y,angle,palette){
+ c.save();c.translate(x,y);c.rotate(angle);
+ c.strokeStyle=palette.sprig;c.lineWidth=.95;c.lineCap='round';
+ c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(17,3,48,28);c.stroke();
+ for(let i=0;i<15;i++){
+  const z=i/14,bx=z*48,by=z*z*28,reach=6+Math.sin(z*Math.PI)*8;
+  rule(c,bx,by,bx+1+reach*.27,by-reach);
+  rule(c,bx,by,bx-1-reach*.35,by+reach*.78);
+ }
+ c.fillStyle=palette.berry;
+ dot(c,19,9,2.45);dot(c,24,10,2.05);dot(c,21,14,1.88);
  c.restore();
 }
-function bokeh(c,r,x,y,w,h,n,colors){for(let i=0;i<n;i++){let xx=x+r()*w,yy=y+r()*h,rs=2+r()*6;glow(c,xx,yy,rs,colors[(r()*colors.length)|0],.13+r()*.2);}}
-function windowLight(c,x,y,w,h,r){
- glow(c,x+w*.54,y+h*.55,w*1.35,'255,160,73',.23,1.4);c.fillStyle='#342724';c.fillRect(x-3,y-3,w+6,h+6);c.fillStyle=gradient(c,[[0,'#775442'],[.45,'#d69557'],[.85,'#f6bf76'],[1,'#936549']],0,y,0,y+h);c.fillRect(x,y,w,h);
- for(let j=0;j<11;j++){let xx=x+r()*w; line(c,[[xx,y],[xx+2,y+h]],r()<.55?'#67463722':'#ffe2a240',.5+r()*3);}
- line(c,[[x+w*.48,y],[x+w*.48,y+h]],'#4f392f',2);line(c,[[x,y+h*.47],[x+w,y+h*.47]],'#5c4030',2);line(c,[[x-4,y+h+2],[x+w+5,y+h+2]],'#765543',4);
+function drawCard(c,memory,palette,index){
+ const background=c.createLinearGradient(0,12,W,H);
+ background.addColorStop(0,palette.light);background.addColorStop(1,palette.shade);
+ c.fillStyle=background;c.fillRect(0,0,W,H);
+ const r=seeded(index*137+93);
+ c.fillStyle=palette.grain;
+ for(let i=0;i<250;i++)dot(c,r()*W,r()*H,.2+.56*r());
+
+ c.strokeStyle=palette.line;c.lineWidth=.7;c.strokeRect(13,13,W-26,H-26);
+ evergreen(c,22,27,-.44,palette);
+ evergreen(c,W-22,H-25,Math.PI-.44,palette);
+
+ c.fillStyle=palette.accent;
+ sealStar(c,W/2,44,8.2);
+ dot(c,W/2-15,44,1.05);dot(c,W/2+15,44,1.05);
+ c.textAlign='center';c.textBaseline='middle';
+ c.font='17px '+CJK;c.fillText(memory.title,W/2,80);
+ c.strokeStyle=palette.line;c.lineWidth=.8;
+ rule(c,W/2-32,104,W/2+32,104);
+
+ const maxWidth=392;
+ let fontSize=44;
+ c.font='600 '+fontSize+'px '+CJK;
+ const widest=Math.max(...memory.lines.map(line=>c.measureText(line).width));
+ if(widest>maxWidth){
+  fontSize=Math.floor(fontSize*maxWidth/widest);
+  c.font='600 '+fontSize+'px '+CJK;
+ }
+ const baseline=177,gap=fontSize*1.32;
+ c.fillStyle=palette.ink;
+ memory.lines.forEach((line,i)=>c.fillText(line,W/2,baseline+(i-(memory.lines.length-1)/2)*gap));
+
+ c.strokeStyle=palette.line;rule(c,W/2-29,265,W/2-10,265);rule(c,W/2+10,265,W/2+29,265);
+ c.fillStyle=palette.accent;sealStar(c,W/2,265,4);
 }
-function sleet(c,r,n=125){for(let i=0;i<n;i++){let x=r()*W,y=r()*H;disk(c,x,y,.35+r()*1.15,.3+r()*1.05,`rgba(233,225,207,${.07+r()*.48})`,r());}}
-function room(c,r,variant){
- c.fillStyle=gradient(c,[[0,'#282223'],[.42,'#795b46'],[.77,'#3f3027'],[1,'#171c20']]);c.fillRect(0,0,W,H);
- for(let i=0;i<210;i++){let y=r()*235,x=r()*W;line(c,[[x,y],[x+r()*45,y+.4]],r()<.5?'#bc8e6740':'#281d1a60',r()*1.6);}
- poly(c,[[0,233],[W,220],[W,H],[0,H]],gradient(c,[[0,'#463225'],[1,'#927061']],0,233,0,H));
- for(let i=0;i<18;i++)line(c,[[W*.55+(i-9)*24,229],[(i-8)*60,H]],'#35262283',1);
- if(variant===0){windowLight(c,292,54,135,135,r);pine(c,220,267,231,87,r,{christmas:true});figure(c,101,293,1.65,{coat:'#743e34',hat:'#502e28',reach:true});figure(c,305,277,1.18,{coat:'#a98b65',hat:'#69524a',facing:-1,reach:true,skin:'#d19b73'});figure(c,408,299,1.52,{coat:'#464c44',hat:'#392b2b',facing:-1});for(let i=0;i<7;i++){let x=120+r()*208,y=264+r()*28,hh=12+r()*13,ww=16+r()*20;let col=['#783a2b','#414f40','#b8905b'][i%3];poly(c,[[x,y],[x+ww,y-3],[x+ww,y+hh],[x,y+hh+3]],col);line(c,[[x+ww*.55,y],[x+ww*.55,y+hh]],'#bd975f',3);} glow(c,222,178,180,'240,128,50',.18);}
- if(variant===1){windowLight(c,48,39,232,170,r);c.fillStyle='#383845';c.fillRect(51,42,225,114);for(let i=0;i<27;i++)disk(c,53+r()*215,47+r()*105,1+r()*1.2,1+r(), '#bbb9b67a');line(c,[[162,44],[162,189]],'#624435',8);line(c,[[52,109],[273,109]],'#72523e',5);line(c,[[40,207],[284,207]],'#ae7d57',6);disk(c,305,253,89,49,'#554745');disk(c,287,251,69,32,'#85594d');figure(c,298,276,1.38,{coat:'#9b7562',hat:'#5b3f34',sit:true});poly(c,[[316,215],[334,216],[349,203],[354,211],[337,230],[320,227]],'#d9b883');line(c,[[332,218],[336,228]],'#7d573d',1);line(c,[[396,262],[397,116]],'#734e31',4);poly(c,[[376,96],[418,97],[437,141],[362,141]],gradient(c,[[0,'#b27f4c'],[1,'#f8c580']],0,102,0,145));glow(c,397,139,124,'255,166,73',.43);disk(c,395,267,29,6,'#615143');}
- if(variant===4){for(let i=0;i<7;i++)windowLight(c,20+i*67,66,58,109,r);for(let i=0;i<8;i++){let x=13+i*62;line(c,[[x,2],[x+12,57]],'#2d2923',2);disk(c,x+12,59,17,4,'#694f3b');glow(c,x+12,60,54,'255,166,70',.36);}figure(c,161,281,1.73,{coat:'#693d34',hat:'#59352e',apron:true});figure(c,337,278,1.51,{coat:'#6e7658',hat:'#54362b',facing:-1,apron:true,skin:'#a97055'});poly(c,[[55,222],[382,214],[457,276],[25,292]],'#8d6144');poly(c,[[25,292],[457,276],[457,291],[25,307]],'#553e33');for(let i=0;i<20;i++){let x=95+r()*320,y=231+r()*48;disk(c,x,y,3+r()*3,2.4,'#cc9b69');}disk(c,245,244,39,11,'#b08a69');disk(c,245,240,34,7,'#6e4936');for(let i=0;i<400;i++)disk(c,194+r()*182,226+r()*50,r()*.85,r()*.4,'#e4c69575');line(c,[[147,259],[207,267]],'#d9aa7d',7);glow(c,264,191,148,'246,169,84',.18);}
- bokeh(c,r,0,20,W,220,36,['230,180,115','241,202,157','238,154,92']);
+function getPicture(index){
+ const value=Number(index),numeric=Number.isFinite(value)?Math.trunc(value):0;
+ const k=(numeric%memories.length+memories.length)%memories.length;
+ if(cache[k])return cache[k];
+ const canvas=document.createElement('canvas');
+ canvas.width=W*RESOLUTION;canvas.height=H*RESOLUTION;
+ const c=canvas.getContext('2d');c.scale(RESOLUTION,RESOLUTION);
+ drawCard(c,memories[k],palettes[paletteSequence[k]],k);
+ return (cache[k]=canvas);
 }
-function streetLamp(c,x,y,h){let z=x-4;line(c,[[x,y],[x,y-h],[x+10,y-h-7],[x+19,y-h-8]],'#413e3b',2.4);let a=x+19,b=y-h+2;glow(c,a,b,47,'244,156,75',.56);poly(c,[[a-6,b-7],[a+6,b-7],[a+4,b+7],[a-4,b+7]],'#d79854');poly(c,[[a-8,b-7],[a,b-12],[a+8,b-7]],'#3e3b32');line(c,[[a,b-6],[a,b+6]],'#ffe09c',2);line(c,[[z,y],[x+4,y]],'#493d34',2);}
-function cabin(c,x,y,w,h,r){
- const back=y-h;let left=x-w*.5,right=x+w*.5;
- poly(c,[[left,back+12],[right,back+12],[right,y],[left,y]],gradient(c,[[0,'#302831'],[1,'#64473b']],0,back,0,y));
- for(let i=0;i<h;i+=5)line(c,[[left,y-i],[right,y-i+1]],'#211e263f',2);
- let roof=[[left-17,back+22],[x-w*.15,back-h*.49],[right+w*.24,back+15],[right+12,back+26]];
- poly(c,roof,'#5b5051');poly(c,[[left-21,back+17],[x-w*.15,back-h*.55],[right+w*.25,back+10],[right+15,back+20]],gradient(c,[[0,'#a5b1b2'],[1,'#666d72']],0,back-h*.5,0,back+16));
- for(let i=0;i<80;i++){let z=r(),p=r();let xx=x-w*.15+(right+w*.25-x+w*.15)*z,yy=back-h*.54+(h*.54+10)*z; disk(c,xx-12*p,yy+9*p,1+r()*6,.6+r()*1.6,'#c6c3b34d',.4);}
- c.fillStyle='#534247';c.fillRect(x+w*.23,back-37,w*.13,39);line(c,[[x+w*.22,back-39],[x+w*.37,back-39]],'#b3aaa4',5);
- for(let i=0;i<11;i++){let p=i/11;glow(c,x+w*.28-43*p,back-40-70*p,3+p*16,'201,195,192',.16*(1-p));}
- windowLight(c,left+w*.16,back+h*.37,w*.24,h*.28,r);windowLight(c,left+w*.64,back+h*.37,w*.23,h*.28,r);
-}
-function outside(c,r,v){
- c.fillStyle=gradient(c,[[0,'#20282f'],[.35,'#41505a'],[.66,'#807e78'],[1,'#a5a098']]);c.fillRect(0,0,W,H);
- glow(c,v===5?97:355,61,136,'213,198,176',.29);disk(c,v===5?97:355,61,9,9,'#d8d1b5');
- for(let i=0;i<160;i++){let x=r()*W,y=43+r()*115; disk(c,x,y,r()*39+11,r()*7+2,r()<.5?'#a5a6a009':'#111c260a',.05);}
- for(let i=0;i<34;i++){let b=150+r()*66,x=-33+r()*540,h=29+r()*96;pine(c,x,b,h,h*.17,r,{snow:true,far:true});}
- c.beginPath(); c.moveTo(0,188);c.bezierCurveTo(132,173,234,214,480,186); c.lineTo(W,H);c.lineTo(0,H);c.closePath();
- c.fillStyle=gradient(c,[[0,'#838887'],[.36,'#aca6a0'],[1,'#c0b7a9']],0,180,0,H);c.fill();
- if(v===2){cabin(c,247,224,134,71,r); for(let i=0;i<12;i++){let x=15+r()*135;if(i%2)x=429+r()*75;let b=181+r()*87,h=60+r()*114;pine(c,x,b,h,h*.24,r,{snow:true});}
-  c.beginPath();c.moveTo(242,225);c.bezierCurveTo(195,251,325,277,399,H);c.lineTo(294,H);c.bezierCurveTo(233,272,181,252,242,225);c.fillStyle='#827f796e';c.fill();
-  glow(c,238,234,115,'230,134,74',.24,.38); figure(c,157,272,.58,{coat:'#77453e',hat:'#7e3a34',skin:'#c9936e'});figure(c,177,271,.49,{coat:'#62564c',hat:'#735949'});}
- if(v===3){for(let i=0;i<9;i++){let p=1-i/9,x=232+(i%2?-1:1)*(175*p+20),yy=177+82*p; cabin(c,x,yy,92*p+16,69*p+14,r);}
-  poly(c,[[224,195],[261,193],[412,336],[48,336]],gradient(c,[[0,'#756b65'],[1,'#595453']],0,195,0,336));
-  for(let i=0;i<160;i++){let q=r(),y=200+q*136,x=236+(r()-.5)*(32+366*q);line(c,[[x,y],[x+r()*24*q,y+.48]],r()<.5?'#bda2834d':'#302f3958',.3+r()*1.2);}
-  for(let i=5;i>=0;i--){let p=1-i/6;let x=252+p*161,y=198+p*94; streetLamp(c,x,y,31+90*p);glow(c,x-9,y,32+p*51,'255,143,67',.26,.29);}
-  figure(c,206,284,.89,{coat:'#663935',hat:'#73433d'});figure(c,234,283,.75,{coat:'#4b544b',hat:'#736547',facing:-1});}
- if(v===5){c.beginPath();c.moveTo(0,246);c.quadraticCurveTo(255,218,W,233);c.lineTo(W,H);c.lineTo(0,H);c.fillStyle=gradient(c,[[0,'#6b7d89'],[.7,'#909b9d'],[1,'#637583']],0,219,0,H);c.fill();
-  for(let i=0;i<90;i++){let x=r()*W,y=237+r()*100;line(c,[[x,y],[x+r()*60,y+r()*4-2]],r()<.3?'#d5d4c57b':'#35495a3e',.3+r());}
-  for(let i=0;i<12;i++){let x=20+i*44;glow(c,x,219,15,'249,175,78',.5);disk(c,x,219,1.6,1.6,'#f9c279');}
-  figure(c,171,285,1.14,{coat:'#8a3e33',hat:'#873f3d',skate:true});figure(c,277,268,.91,{coat:'#647562',hat:'#b28d65',facing:-1,skate:true});
-  line(c,[[60,306],[119,300],[155,292],[201,291]],'#d4d7d5a2',1.6);line(c,[[275,279],[304,271],[323,272],[347,282]],'#d4d7d591',1.4);}
- if(v===2||v===5)for(let i=0;i<550;i++){let y=222+r()*114,x=r()*W; line(c,[[x,y],[x+1+r()*16,y+.1]],r()<.55?'#d7cebe3a':'#4548523a',.3+r()*.7);}
- sleet(c,r);
-}
-function finish(c,r){let g=c.createRadialGradient(239,163,70,241,161,283);g.addColorStop(0,'#211b1400');g.addColorStop(.67,'#28201e0e');g.addColorStop(1,'#1b1219bb');c.fillStyle=g;c.fillRect(0,0,W,H);
- const im=c.getImageData(0,0,W,H);for(let i=0;i<im.data.length;i+=4){let n=(r()-.5)*17;im.data[i]=im.data[i]*.96+8+n;im.data[i+1]=im.data[i+1]*.91+7+n;im.data[i+2]=im.data[i+2]*.85+8+n;}c.putImageData(im,0,0);
- for(let i=0;i<95;i++){let x=r()*W,y=r()*H;disk(c,x,y,.24+r()*.75,.2+r()*.5,'#f1d9b03e');}
-}
-function solsticeFrame(c,r,v){
- const morning=v===7,blue=v===6||v===10,warm=v===9||v===11;
- c.fillStyle=gradient(c,morning?[[0,'#767d8a'],[.57,'#e2b48c'],[1,'#bbb0a2']]:blue?[[0,'#182839'],[.63,'#586477'],[1,'#9a9ba2']]:[[0,'#49525b'],[.65,'#9c8c7f'],[1,'#c4b4a2']]);c.fillRect(0,0,W,H);
- const moonX=morning?347:127;glow(c,moonX,78,90,morning?'240,183,108':'198,214,229',.43,.66);disk(c,moonX,78,morning?17:10,morning?14:10,morning?'#f6cc9e':'#e2e5dd');
- for(let d=0;d<4;d++){const h=160+d*14,ys=Array.from({length:20},(_,j)=>[j*27,h-(r()*.76+.24)*(.24+.76*Math.sin((j+1)*.57+d)**2)*(60-d*9)]);
- poly(c,[[0,H],...ys,[W,H]],['#626874','#59616c','#4d5965','#48535c'][d]);
- for(let j=0;j<ys.length-1;j++)if(r()>.38){const [x,y]=ys[j];poly(c,[[x-12,y+15],[x,y],[x+11,y+11],[x+4,y+9],[x+1,y+15]],['#adb0b2','#a2a6a8','#8d939a','#818990'][d]);}}
- let y0=v===6?183:216;
- c.beginPath();c.moveTo(0,y0+18);c.bezierCurveTo(98,y0-18,235,y0+27,W,y0-2);c.lineTo(W,H);c.lineTo(0,H);c.closePath();c.fillStyle=gradient(c,[[0,'#9ba6a5'],[.62,'#b0aa9f'],[1,'#d3c7af']],0,y0,0,H);c.fill();
- for(let i=0;i<480;i++){const x=r()*W,y=y0+14+r()*(H-y0-12);line(c,[[x,y],[x+3+r()*21,y+.20]],r()>.64?'#f1dbb739':'#4f62653d',.32+r()*.9);}
- for(let j=0;j<33;j++){const x=r()*W,y=y0+2+r()*24;pinesil(c,x,y,8+r()*42,4+r()*10,blue?'#273c44':'#384849',r);}
- if(v===6){for(let i=0;i<55;i++){const y=195+r()*140,w=8+r()*32,s=i%3;line(c,[[moonX-(r()*.8+.2)*w,y],[moonX+r()*w,y]],s?'#f2ead64e':'#f6e3bd74',.6+r()*1.1);}}
- if(v===8){poly(c,[[39,285],[333,214],[426,226],[113,311]],'#483b32');poly(c,[[38,278],[337,206],[424,219],[111,299]],'#bdad90');
-  for(let j=0;j<8;j++){let x=43+j*45,y=281-j*9;line(c,[[x,y],[x,y-35]],'#44362d',4);}
-  line(c,[[43,245],[357,176]],'#675340',4);line(c,[[43,249],[357,180]],'#c7b17e',1);streetLamp(c,343,229,65);}
- if(v===9){poly(c,[[118,211],[223,110],[365,203],[365,324],[119,324]],'#4f4138');poly(c,[[94,210],[219,99],[382,195],[368,211],[219,122],[113,225]],'#ded7c1');poly(c,[[207,205],[282,193],[285,300],[209,312]],'#782f25');windowLight(c,226,205,46,43,r);disk(c,268,274,3,3,'#c79b59');streetLamp(c,94,295,67);}
- if(v===11){for(let j=0;j<7;j++){const x=36+j*66,y=249+j%3*13,w=35+r()*26;poly(c,[[x,y-12],[x+w*.45,y-50],[x+w,y-10],[x+w,y+10],[x,y+11]],'#51423a');line(c,[[x-2,y-10],[x+w*.45,y-50],[x+w+3,y-8]],'#e3d8c5',5);windowLight(c,x+w*.27,y-16,w*.45,16,r);}}
- if(v===10){pinesil(c,42,334,257,61,'#203633',r);pinesil(c,436,329,227,53,'#233834',r);for(let j=0;j<4;j++)streetLamp(c,209+j*36,326-j*24,72-j*10);}
- if(warm)glow(c,v===9?243:247,267,177,'244,158,82',.19,.50);
- sleet(c,r,195);
-}
-function pinesil(c,x,y,h,w,color,r){
- line(c,[[x,y],[x+2,y-h]],color,Math.max(1,h*.025));
- for(let j=1;j<=9;j++){const k=j/9,p=y-h+k*h;const a=w*Math.pow(k,.94)*(1+r()*.14);
- poly(c,[[x,p-h*.15],[x-a,p+h*.07],[x-a*.27,p+h*.055],[x,p+h*.03],[x+a*.51,p+h*.098],[x+a,p+h*.078]],color);
- if(j>3)line(c,[[x-a*.73,p+.06*h],[x-a*.21,p-.02*h]],'#c2c4bf72',Math.max(.55,h*.012));}
-}
-function getPicture(index){const k=((Number(index)||0)%memories.length+memories.length)%memories.length;if(cache[k])return cache[k]; const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;const c=canvas.getContext('2d',{willReadFrequently:true});const r=seeded(1387+k*19);const variant=memories[k].scene??k;
- if(variant>=6){solsticeFrame(c,r,variant);finish(c,r);return (cache[k]=canvas);}
- const warm=variant===0||variant===1||variant===4;
- // Alternate crops and illumination for the revisited winter scenes.
- if(k>5){const zoom=1.09+((k*3)%7)*.052;c.save();c.translate(warm?-24:-37,-18);c.scale(zoom,zoom);if(k%2===0){c.translate(W,0);c.scale(-1,1);}}
- if(warm)room(c,r,variant);else outside(c,r,variant);
- if(k>5){c.restore();c.fillStyle=['#9b472b22','#6c81922c','#294c3720','#6f432d27'][k%4];c.fillRect(0,0,W,H);}
- finish(c,r);return (cache[k]=canvas);}
 
 // Only the printed image is mapped to the curved sheet; its original aspect
 // ratio is preserved in both states. There is no border or backing rectangle.
 const LIMIT=24;
+const SCENE_PHOTO_EDGE=960;
+const PHOTO_CAPTION_LIMIT=64;
 const EASE=(v)=>{const t=Math.min(1,Math.max(0,v));return t*t*(3-2*t);};
 const angleDiff=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
 function sheet(THREE){
@@ -1645,6 +1661,7 @@ function makePhotos(THREE,scene,{hasInitialPhotos=false}={}){
   const artworks=new Map();
   let uploadSerial=0,loadQueue=Promise.resolve();
   const surface=sheet(THREE);
+  const captionSurface=new THREE.PlaneGeometry(1,1);
   const eyeRing=new THREE.TorusGeometry(.024,.0052,6,14);
   const ropeGeometry=new THREE.CylinderGeometry(.009,.009,1,6);
   const eyeMetal=new THREE.MeshBasicMaterial({color:0xbd9266,toneMapped:false});
@@ -1665,13 +1682,70 @@ function makePhotos(THREE,scene,{hasInitialPhotos=false}={}){
   let spinTime=null,liftTilt=0,liftRate=0,lagTilt=0,lagRate=0;
   const TAU=2*Math.PI,mod=(x)=>((x%TAU)+TAU)%TAU;
   const bound=(x,a,b)=>Math.max(a,Math.min(b,x));
+  function removeCaptionStrip(entry){
+    const strip=entry.captionStrip;
+    if(!strip)return;
+    entry.face.remove(strip);
+    strip.material.map.dispose();
+    strip.material.dispose();
+    entry.captionStrip=null;
+  }
+  function updateCaptionStrip(entry,caption){
+    if(caption===entry.printedCaption)return;
+    removeCaptionStrip(entry);
+    entry.printedCaption=caption;
+    if(!caption)return;
+    const stripWidth=.92,width=768;
+    const maxHeight=Math.max(1,Math.min(width,Math.floor(width*.46*entry.h/(stripWidth*entry.w))));
+    const canvas=document.createElement('canvas');canvas.width=width;
+    const ctx=canvas.getContext('2d',{alpha:false});
+    const value=caption.replace(/\s+/gu,' ');
+    const typeface='px "Noto Serif SC","Songti SC","Microsoft YaHei","PingFang SC",serif';
+    let fontSize=Math.min(64,Math.max(12,Math.floor(maxHeight*.60)));
+    let lines,lineHeight,padding,height;
+    for(;;){
+      ctx.font='600 '+fontSize+typeface;
+      lines=[];
+      let line='';
+      for(const character of value){
+        if(line&&ctx.measureText(line+character).width>width*.88){
+          lines.push(line.trimEnd());line='';
+        }
+        line+=character;
+      }
+      if(line.trim())lines.push(line.trim());
+      lineHeight=Math.round(fontSize*1.25);
+      padding=Math.round(fontSize*.25+3);
+      height=lines.length*lineHeight+2*padding;
+      if(height<=maxHeight||fontSize<=12)break;
+      fontSize=Math.max(12,fontSize-4);
+    }
+    canvas.height=Math.min(height,maxHeight);
+    ctx.fillStyle='#f7efdf';ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.scale(1,canvas.height/height);
+    ctx.fillStyle='#c69870';ctx.fillRect(0,0,width,2);
+    ctx.font='600 '+fontSize+typeface;
+    ctx.fillStyle='#563b32';ctx.textAlign='center';ctx.textBaseline='middle';
+    lines.forEach((line,i)=>ctx.fillText(line,width/2,padding+(i+.5)*lineHeight));
+    const map=new THREE.CanvasTexture(canvas);
+    map.colorSpace=THREE.SRGBColorSpace;map.anisotropy=8;
+    const material=new THREE.MeshBasicMaterial({map,side:THREE.FrontSide,toneMapped:false});
+    const strip=new THREE.Mesh(captionSurface,material);
+    strip.name='Photo blessing strip';
+    const heightOnFace=canvas.height/width*stripWidth*entry.w/entry.h;
+    strip.scale.set(stripWidth,heightOnFace,1);
+    // Use the photo's local coordinates and sit just beyond its curved front.
+    strip.position.set(0,-.48+heightOnFace*.5,.041);
+    entry.face.add(strip);
+    entry.captionStrip=strip;
+  }
   function create(m,index,asset=null,src=''){
     const g=new THREE.Group();root.add(g);
     const art=asset?.image||getPicture(index);
     const {width,height}=asset||art,max=Math.max(width,height);
     let tex=asset?.texture;
     if(!tex){
-      tex=new THREE.Texture(art);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=4;tex.needsUpdate=true;
+      tex=new THREE.Texture(art);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=8;tex.needsUpdate=true;
       if(asset)asset.texture=tex;
     }
     // The print is readable at night without emitting or spreading any light.
@@ -1797,6 +1871,7 @@ function makePhotos(THREE,scene,{hasInitialPhotos=false}={}){
     const retained=new Set(next);
     for(const entry of objects){
       if(retained.has(entry))continue;
+      removeCaptionStrip(entry);
       root.remove(entry.g);entry.rope.dispose();entry.material.dispose();
       if(!entry.src)entry.material.map.dispose();
     }
@@ -1820,7 +1895,7 @@ function makePhotos(THREE,scene,{hasInitialPhotos=false}={}){
       const img=new Image();img.src=src;await img.decode();
       const width=img.naturalWidth||img.width,height=img.naturalHeight||img.height;
       if(!width||!height)return null;
-      const sceneSize=768,scale=sceneSize/Math.max(width,height);
+      const scale=SCENE_PHOTO_EDGE/Math.max(width,height);
       if(scale>=1)return {image:img,width,height};
       const thumbnail=document.createElement('canvas');
       thumbnail.width=Math.max(1,Math.round(width*scale));thumbnail.height=Math.max(1,Math.round(height*scale));
@@ -1846,13 +1921,18 @@ function makePhotos(THREE,scene,{hasInitialPhotos=false}={}){
       if(serial!==uploadSerial)return 0;
     }
     const unused=new Set(objects),next=[];
-    for(const {src,name} of list){
+    for(const {src,name,caption} of list){
       const asset=artworks.get(src);
       if(!asset)continue;
       const title=name||'照片';
-      const entry=objects.find(p=>p.src===src&&p.item.title===title&&unused.has(p));
-      next.push(entry||create({title,caption:''},next.length,asset,src));
-      unused.delete(entry);
+      const text=typeof caption==='string'?Array.from(caption.trim()).slice(0,PHOTO_CAPTION_LIMIT).join(''):'';
+      const blessing=text||photoBlessing(title,next.length);
+      const cached=objects.find(p=>p.src===src&&p.item.title===title&&unused.has(p));
+      const entry=cached||create({title,caption:blessing},next.length,asset,src);
+      entry.item.caption=blessing;
+      updateCaptionStrip(entry,text);
+      next.push(entry);
+      unused.delete(cached);
     }
     if(next.length)setObjects(next);else loadDefaults();
     releaseArtworks(needed);
@@ -1869,10 +1949,10 @@ function makePhotos(THREE,scene,{hasInitialPhotos=false}={}){
 
   function update(t,open,formation,options={}){
     const {camera,portrait=camera?.aspect<1,orbitalScale=1,orbitPhase=t*.34,orbitTurn,orbitCycle=0,reduced=false,
-      spinVelocity=0,spinAcceleration=0,dt}=options;
+      interactiveSpin=!reduced,spinVelocity=0,spinAcceleration=0,dt}=options;
     const elapsed=Number.isFinite(dt)?dt:(spinTime===null?1/60:t-spinTime);
     spinTime=t;
-    if(reduced||open>.24||elapsed<0){liftTilt=liftRate=lagTilt=lagRate=0;}
+    if(!interactiveSpin||open>.24||elapsed<0){liftTilt=liftRate=lagTilt=lagRate=0;}
     else {
       const v=Number.isFinite(spinVelocity)?bound(spinVelocity,-12,12):0;
       const a=Number.isFinite(spinAcceleration)?bound(spinAcceleration,-38,38):0;
@@ -1975,7 +2055,7 @@ function makePhotos(THREE,scene,{hasInitialPhotos=false}={}){
         root.worldToLocal(closePos);
         const pull=swell*EASE((k-.85)/.15);
         const base=radius+towardLens,goal=Math.max(base,Math.hypot(closePos.x,closePos.z));
-        const ideal=base+(goal-base)*pull*.815;
+        const ideal=base+(goal-base)*pull*(portrait?.90:.815);
         let lo=base,hi=goal+.62;
         ty=ty+(closePos.y-ty)*pull*.90;
         const fits=r=>{
@@ -2012,12 +2092,13 @@ function makePhotos(THREE,scene,{hasInitialPhotos=false}={}){
         calmPose.setFromEuler(windEuler);
         // Vary depth as well as the sideways swing. A slight outward bias
         // leaves extra room on the toward-tree stroke, especially low down.
-        const depthWind=common*(.093*Math.sin(local+.76)+.014*Math.sin(t*2.25+q)-.014);
+        const depthWind=reduced?0:common*(.093*Math.sin(local+.76)+.014*Math.sin(t*2.25+q)-.014);
+        const rollWind=reduced?0:swing*common*(.119*Math.sin(local)+.021*Math.sin(t*2.16+q));
         const heft=.94+.12*rad;
         const radialSwing=Math.max(-1.47-mountLean,depthWind-liftTilt*heft);
-        windEuler.set(reduced?0:radialSwing,
+        windEuler.set(radialSwing,
           reduced?0:common*(.027*Math.sin(local+1.52)+.010*Math.sin(t*1.19+q)),
-          reduced?0:swing*common*(.119*Math.sin(local)+.021*Math.sin(t*2.16+q))+lagTilt*heft,'YXZ');
+          rollWind+lagTilt*heft,'YXZ');
         windPose.setFromEuler(windEuler).premultiply(calmPose);
         g.quaternion.slerp(windPose,attached);
         calmAnchor.copy(mountAnchor).applyQuaternion(calmPose);
@@ -2074,7 +2155,7 @@ function makePhotos(THREE,scene,{hasInitialPhotos=false}={}){
   return {items,update,pick,replace};
 }
 
-return {memories,getPicture,makePhotos};
+return {memories,photoBlessing,getPicture,makePhotos};
 })();
 
 const $m4=(()=>{
@@ -3477,7 +3558,7 @@ const $m11=(()=>{
 const T=$m0;
 const {makeFir}=$m2;
 const {makeEnvironment}=$m1;
-const {makePhotos}=$m3;
+const {makePhotos,photoBlessing}=$m3;
 const {createSleighSequence}=$m7;
 const {createReindeer}=$m6;
 const {makeBell,makeBellAct,BELL_WAIT,orbitRhythm,mobileOrbitRhythm}=$m8;
@@ -3503,6 +3584,9 @@ function album(i=0,opener=canvas){
  galleryIndex=(i+items.length)%items.length;
  const item=items[galleryIndex];
  $('#print').src=item.url;$('#print').alt=item.title;
+ const blessing=$('#photo-blessing');
+ blessing.textContent=item.caption||'';
+ blessing.hidden=!item.caption;
  $('#caption').textContent=item.title;$('#index').textContent=(galleryIndex+1)+' / '+items.length;
  $('#prev').disabled=$('#next').disabled=items.length<2;
  if(!book.open){galleryOpener=opener;book.showModal();onGalleryOpen();}
@@ -3525,7 +3609,9 @@ function failure(e){
  $('#mast').inert=false;
  if(letterDialog.open)letterDialog.close();
  $('#fallback-letter').append($('#letter-copy'));
- galleryItems=()=>personal.photos.map(photo=>({url:photo.src,title:photo.name}));
+ galleryItems=()=>personal.photos.map((photo,index)=>({
+  url:photo.src,title:photo.name,caption:photo.caption?.trim()||photoBlessing(photo.name,index),
+ }));
  onGalleryOpen=onGalleryClose=()=>{};
  fallbackGallery.hidden=!personal.photos.length;
  if(book.open){galleryOpener=personal.photos.length?fallbackGallery:$('#retry');book.close();}
@@ -3661,10 +3747,13 @@ function launch(){
  // A small, steady turn keeps the scene visibly live on a phone, even in reduced motion.
  const idleTurn=touchScene ? (s.reduced ? .072 : .10) : (s.reduced ? 0 : .044);
  const animatedOrbit=touchScene||!s.reduced;
+ const interactiveSpin=touchScene||!s.reduced;
  const touchOrbitSeconds=s.reduced ? 8.8 : 7.4;
  const orbitAt=touchScene ? t=>mobileOrbitRhythm(t,touchOrbitSeconds) : orbitRhythm;
  const slowFrameLimit=touchScene ? .60 : .10;
  const slowFrameBudget=touchScene ? 18 : 45;
+ const minimumDpr=touchScene ? Math.min(1,devicePixelRatio||1) : .85;
+ const bufferSizeLimit=renderer.capabilities?.maxTextureSize||Infinity;
  const act=makeBellAct(orbitAt),bell=makeBell(T,camera);
  wakeHUD();
  const dial=$('#daylight'),dayText=$('#daylight-label');
@@ -3690,15 +3779,20 @@ function launch(){
  const point=e=>{const r=canvas.getBoundingClientRect();return [(e.clientX-r.left)/r.width,1-(e.clientY-r.top)/r.height]};
  const reading=()=>s.phase==='snow'||s.phase==='letter';
  const canMoveTree=()=>s.phase==='tree'&&!s.lock&&act.pulled<0;
+ const canSwingMountedPhotos=()=>interactiveSpin&&s.phase==='tree'&&s.target<.5&&s.open<.002&&act.pulled<0;
  const zoomBy=factor=>{manualZoom=clamp(manualZoom*factor,1,1.75)};
- const targetDpr=()=>reading()?Math.max(pixelRatio,Math.min(devicePixelRatio||1,portrait?1.7:2)):pixelRatio;
+ function targetDpr(){
+  const requested=reading()?Math.max(pixelRatio,Math.min(devicePixelRatio||1,portrait?1.7:2)):pixelRatio;
+  return Math.min(requested,bufferSizeLimit/Math.max(1,canvas.clientWidth,canvas.clientHeight));
+ }
  function resize(){
   const w=Math.max(1,canvas.clientWidth),h=Math.max(1,canvas.clientHeight);aspect=w/h;portrait=aspect<1;camera.aspect=aspect;
   camera.fov=portrait?Math.max(41,2*Math.atan(2.50/(11.7*aspect))*180/Math.PI):40;camera.updateProjectionMatrix();
   lastDpr=targetDpr();renderer.setDrawingBufferSize(w,h,lastDpr);resizePending=false;
   if(fir.pointScale)fir.pointScale.value=Math.max(.56,lastDpr*h/720);
  }
- pixelRatio=Math.min(devicePixelRatio||1,innerWidth<700?1.25:1.5);window.addEventListener('resize',()=>{resizePending=true});
+ const dprBudget=touchScene||innerWidth>=700 ? 1.8 : 1.5;
+ pixelRatio=Math.min(devicePixelRatio||1,dprBudget);window.addEventListener('resize',()=>{resizePending=true});
  function rig(dt){const fly=s.phase==='flight'?clamp(seq.motionProgress?.(s.sleigh)??s.sleigh):0;const wobble=s.reduced?0:Math.exp(-(((fly-.69)*14)**2))*.036;
   const follow=portraitFlightFrame(fly,aspect);
   const n=clamp((s.sleigh+.17)/.14),flightFade=n*n*(3-2*n);
@@ -3764,20 +3858,20 @@ function launch(){
    restSpin+=(Number(assembled)-restSpin)*(1-Math.exp(-dt*(assembled?1.65:14)));
    if(quietTree&&s.open<.16){const u=clamp(s.open/.16);pivot.rotation.y+=idleTurn*restSpin*dt*(1-u*u*(3-2*u));}
   }
-  const spinMounted=!s.reduced&&s.phase==='tree'&&s.target<.5&&s.open<.002&&act.pulled<0;
-  if(!spinMounted)clearSpin();
+  if(!canSwingMountedPhotos())clearSpin();
   else if(!paused&&dt>0){
-   spinAge+=elapsed;
+   if(!touchScene)spinAge+=elapsed;
    const target=spinAge<.075?sampledSpin:sampledSpin*Math.exp(-(spinAge-.075)*4.6);
    const prior=spinVelocity;
    spinVelocity+=(target-spinVelocity)*(1-Math.exp(-dt*18));
    const force=clamp((spinVelocity-prior)/dt,-38,38);
    spinAcceleration+=(force-spinAcceleration)*(1-Math.exp(-dt*14));
+   if(touchScene)spinAge+=dt;
    if(spinAge>1.3&&Math.abs(spinVelocity)<.035)clearSpin();
 
   }
   if(!paused&&elapsed>.029&&elapsed<slowFrameLimit)slow++;else slow=Math.max(0,slow-1);
-  if(slow>slowFrameBudget&&pixelRatio>.87&&!reading()){pixelRatio=Math.max(.85,pixelRatio*.89);slow=0;}
+  if(slow>slowFrameBudget&&pixelRatio>minimumDpr+.02&&!reading()){pixelRatio=Math.max(minimumDpr,pixelRatio*.89);slow=0;}
   // A drawing buffer resize clears WebGL. Allocate only in the same RAF as draw.
   if(resizePending||lastDpr!==targetDpr())resize();
   rig(dt);
@@ -3795,7 +3889,7 @@ function launch(){
   const orbitTurn=animatedOrbit&&s.phase==='tree'&&s.open>0?rhythm.turn:undefined;
   const treeTime=touchScene&&s.reduced?age*.72:t;
   fir.update(treeTime,s.open,s.formation,{orbitalScale,turnRate,orbitPhase,spinVelocity,spinAcceleration,dt:paused?0:dt});
-  const featured=photos.update(t,s.open,s.formation,{camera,portrait,orbitalScale,orbitPhase,orbitTurn,orbitCycle:rhythm.cycle+showcaseOffset,reduced:s.reduced,spinVelocity,spinAcceleration,dt:paused?0:dt});
+  const featured=photos.update(t,s.open,s.formation,{camera,portrait,orbitalScale,orbitPhase,orbitTurn,orbitCycle:rhythm.cycle+showcaseOffset,reduced:s.reduced,interactiveSpin,spinVelocity,spinAcceleration,dt:paused?0:dt});
   if(featured&&s.target>.5)showcaseSeen=Math.max(showcaseSeen,rhythm.cycle);
   const film=s.phase==='flight'||reading();seq.group.visible=film;
   // The sleigh is present only in the feature triggered by the viewer.
@@ -3898,9 +3992,10 @@ function launch(){
   if(s.phase==='snow')trace(touch.p,p);
   else if(s.phase==='tree'&&touch.tree&&touch.moved){
    const yaw=touch.yaw+d*5.0,at=pointerSeconds(e);
-   if(!s.reduced&&s.target<.5&&s.open<.002&&act.pulled<0){
+   const deltaYaw=yaw-touch.previousYaw;
+   if(canSwingMountedPhotos()&&(touch.type!=='touch'||Math.abs(deltaYaw)>.004)){
     const sampleTime=clamp(at-touch.previousAt,.009,.18);
-    sampledSpin=clamp((yaw-touch.previousYaw)/sampleTime,-12,12);spinAge=0;
+    sampledSpin=clamp(deltaYaw/sampleTime,-12,12);spinAge=0;
    }
    touch.previousYaw=yaw;touch.previousAt=at;pivot.rotation.y=yaw;
   }
