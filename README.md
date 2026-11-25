@@ -10,8 +10,7 @@
 2. 点击信封进入雪景并开启音乐。快速横向拨动树，挂在树上的照片会扬起再摆回。桌面可以用滚轮缩放，鼠标移到画面上沿或下沿可以呼出工具栏。
 3. 点树或点「散开回忆」，让雪白、莓红和暖金的祝福卡轮流靠近镜头。每张卡上都印有不同的中文祝福。想读信时，点「雪橇来信」，再擦开雪层或点「直接读信」。
 
-<img src="./screenshots/demo-mobile.jpg" width="390" alt="手机竖屏演示中靠近镜头的照片和漂浮灯光">
-<img src="./screenshots/photo-blessing.jpg" width="390" alt="手机相册里印着中文祝福的莓红卡片">
+<p align="center"><img src="./screenshots/demo-mobile.jpg" width="48%" alt="手机竖屏演示中靠近镜头的照片和漂浮灯光"> <img src="./screenshots/photo-blessing.jpg" width="48%" alt="手机相册里印着中文祝福的莓红卡片"></p>
 
 ## 创作版 · 做一份自己的来信
 
